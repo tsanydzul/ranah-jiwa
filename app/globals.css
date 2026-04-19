@@ -212,6 +212,7 @@
     opacity: 1;
   }
   html {
+    font-size: 90%;
     @apply font-sans;
   }
   ::selection {

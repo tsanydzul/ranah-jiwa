@@ -76,7 +76,7 @@ export default function ProductsPage() {
                         alt={book.title}
                         width={900}
                         height={1200}
-                        className="h-[20rem] w-full rounded-[1.2rem] object-cover"
+                        className="h-auto max-h-[32rem] w-full rounded-[1.2rem] object-contain"
                       />
                     </div>
                   ) : (
@@ -101,7 +101,9 @@ export default function ProductsPage() {
                     ) : null}
                   </div>
 
-                  <p className="text-sm leading-7 text-muted-foreground">{book.description}</p>
+                  <p className="text-sm leading-7 whitespace-pre-line text-muted-foreground">
+                    {book.description}
+                  </p>
 
                   {(book.year || book.publisher) ? (
                     <div className="grid gap-3 sm:grid-cols-2">

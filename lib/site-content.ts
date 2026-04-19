@@ -189,7 +189,7 @@ export const services = [
   {
     id: "assyifa",
     packageName: "Assyifa",
-    title: "Mental Health Check Up",
+    title: "Konseling Mental Health Check Up",
     summary:
       "Check-up mental plus sesi lanjut untuk membantu membaca hasil secara lebih personal.",
     description:
@@ -302,7 +302,14 @@ export const seminars = [
   },
 ] satisfies SeminarItem[]
 
-export const books: BookItem[] = []
+export const books: BookItem[] = [
+  {
+    title: "Senja Kala Di Kampung Moderasi",
+    description:
+      "Sebuah kisah fiksi tentang perjalanan pengabdian di tanah Tana Toraja—tentang pertemuan, kehilangan, dan makna yang perlahan ditemukan.\n\nDi balik setiap langkah, tersimpan proses memahami diri, menerima ketidaksempurnaan, dan belajar melihat hidup dari sudut pandang yang berbeda.",
+    cover: "/senja-kala-di-kampung-moderasi.png",
+  },
+]
 
 export const bookingOptions = {
   genders: ["Perempuan", "Laki-laki", "Lainnya / memilih tidak menjawab"],
@@ -426,7 +433,7 @@ export const servicesPageContent = {
     quickStats: [
       { title: "6 paket", body: "Seluruh pilihan layanan inti Ranah Jiwa." },
       { title: "Mulai 30 menit", body: "Ada opsi check-up singkat hingga asesmen terarah." },
-      { title: "PDF + rekomendasi", body: "Output jelas untuk paket pemeriksaan dan asesmen." },
+      { title: "Hasil dan rekomendasi", body: "Output jelas untuk paket pemeriksaan dan asesmen." },
       { title: "Online / Offline", body: "Pelaksanaan menyesuaikan konteks dan kebutuhan." },
     ],
   },
