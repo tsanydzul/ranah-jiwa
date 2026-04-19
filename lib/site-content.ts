@@ -17,9 +17,6 @@ export type TestimonialItem = {
 
 export type CertificationItem = {
   title: string
-  issuer: string
-  date: string
-  highlights: string[]
 }
 
 export type ServiceItem = {
@@ -119,14 +116,28 @@ export const profileContent = {
   ],
   certifications: [
     {
-      title: "Basic Practitioners Forgiveness Therapy",
-      issuer: "Yayasan Kreativitas Membangun Seindonesia (YKMS)",
-      date: "Mar 2025",
-      highlights: [
-        "Completed foundational training in forgiveness-based therapeutic approaches.",
-        "Learned practical techniques to assist clients in resolving emotional wounds through the forgiveness process.",
-        "Gained basic practitioner skills applicable in counseling and psychoeducational settings.",
-      ],
+      title: "Certified Counselling, Coaching, and Therapy",
+    },
+    {
+      title: "Basic Practitioner Forgiveness Therapy",
+    },
+    {
+      title: "Islamic Mindfulness Practitioner",
+    },
+    {
+      title: "Quranic Healing Journaling Practitioner",
+    },
+    {
+      title: "Basic Acceptance and Commitment Therapy (ACT) Practitioner",
+    },
+    {
+      title: "Dialectical Behaviour Therapy (DBT) Practitioner",
+    },
+    {
+      title: "Phototherapy Essence of Life Basic Practitioner",
+    },
+    {
+      title: "Best Practice Konseling Kedukaan",
     },
   ] satisfies CertificationItem[],
 }
@@ -167,6 +178,24 @@ export const testimonials = [
     role: "Seminar komunitas",
     quote:
       "Materinya relevan, ringan dicerna, dan tetap terasa profesional. Banyak insight yang langsung bisa diterapkan sehari-hari.",
+  },
+  {
+    name: "Klien D",
+    role: "Konseling individu",
+    quote:
+      "Pasca konseling, saya merasa jauh lebih tenang. Dada yang biasanya mudah terasa sesak juga sudah tidak lagi. Saya benar-benar merasakan banyak perubahan setelah menjalani konseling.",
+  },
+  {
+    name: "Klien E",
+    role: "Konseling individu",
+    quote:
+      "Setelah konseling, saya jadi lebih tahu arah dan apa yang perlu saya lakukan ke depan. Sebelumnya saya hanya punya tekad, tapi belum punya perencanaan yang jelas. Sekarang saya belajar merencanakan langkah-langkah saya dan menjalaninya perlahan.",
+  },
+  {
+    name: "Klien F",
+    role: "Konseling individu",
+    quote:
+      "Setelah konseling, rasa percaya diri saya meningkat. Saya jadi lebih mampu mengatur pikiran, mood, perasaan, dan perilaku, serta lebih paham apa yang harus saya lakukan saat suasana hati berubah.",
   },
 ] satisfies TestimonialItem[]
 
@@ -473,8 +502,7 @@ export const productsPageContent = {
       "Halaman ini disiapkan untuk menyimpan karya buku Ranah Jiwa dan dokumentasi seminar agar lebih rapi, lebih mudah dilihat, dan lebih mudah diperbarui.",
     quickStats: [
       { title: `${books.length}`, body: "Karya buku yang sudah ditambahkan." },
-      { title: `${seminars.length}`, body: "Seminar dan workshop yang sudah terdokumentasi." },
-      { title: "1 halaman", body: "Semua karya dan jejak seminar tersimpan di satu tempat." },
+      { title: "20+", body: "Seminar dan workshop yang sudah terdokumentasi." },
     ],
   },
   books: {

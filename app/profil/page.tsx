@@ -218,25 +218,7 @@ export default function ProfilePage() {
                 </div>
                 {profileContent.certifications.map((item) => (
                   <div key={item.title} className="rounded-[1.8rem] bg-brand-soft/85 p-5">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <p className="font-semibold text-foreground">{item.title}</p>
-                        <p className="text-sm leading-6 text-muted-foreground">{item.issuer}</p>
-                      </div>
-                      <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-brand-purple shadow-soft">
-                        {item.date}
-                      </span>
-                    </div>
-                    <div className="mt-4 grid gap-3">
-                      {item.highlights.map((highlight) => (
-                        <div
-                          key={highlight}
-                          className="rounded-[1.4rem] bg-white/84 p-4 text-sm leading-6 text-muted-foreground"
-                        >
-                          {highlight}
-                        </div>
-                      ))}
-                    </div>
+                    <p className="font-semibold leading-7 text-foreground">{item.title}</p>
                   </div>
                 ))}
               </CardContent>

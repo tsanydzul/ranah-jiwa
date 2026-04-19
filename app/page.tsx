@@ -23,10 +23,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import {
   assetRefs,
+  books,
   homeContent,
   profileContent,
   profilePageContent,
-  seminars,
+  productsPageContent,
   services,
   siteConfig,
   testimonials,
@@ -340,10 +341,10 @@ export default function HomePage() {
                   Karya buku
                 </p>
                 <p className="mt-3 font-heading text-4xl leading-none font-semibold text-foreground">
-                  Arsip siap isi
+                  {books.length}
                 </p>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  Ruang khusus untuk menyimpan buku dan karya tulis Ranah Jiwa saat datanya siap.
+                  {productsPageContent.hero.quickStats[0]?.body}
                 </p>
               </div>
               <div className="paper-panel rounded-[1.7rem] p-5">
@@ -351,10 +352,10 @@ export default function HomePage() {
                   Seminar
                 </p>
                 <p className="mt-3 font-heading text-4xl leading-none font-semibold text-foreground">
-                  {seminars.length}
+                  {productsPageContent.hero.quickStats[1]?.title}
                 </p>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  Dokumentasi seminar dan workshop kini dipindah ke halaman produk agar Home lebih fokus.
+                  {productsPageContent.hero.quickStats[1]?.body}
                 </p>
               </div>
             </div>
