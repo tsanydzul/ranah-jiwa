@@ -134,7 +134,7 @@ export default function ProfilePage() {
                   Riwayat pendidikan
                 </CardTitle>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Dirangkai seperti perjalanan profesional agar cepat dipindai.
+                  Riwayat pendidikan dan pengalaman profesional.
                 </p>
               </div>
 
@@ -169,7 +169,7 @@ export default function ProfilePage() {
                     Area fokus
                   </CardTitle>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    Pendampingan disiapkan untuk fase tumbuh yang berbeda.
+                    Pendampingan untuk anak, remaja, dan dewasa.
                   </p>
                 </div>
                 <div className="grid gap-4">

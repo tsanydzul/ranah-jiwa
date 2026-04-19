@@ -14,7 +14,7 @@ import { buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 export const metadata: Metadata = {
   title: "Produk",
   description:
-    "Halaman produk Ranah Jiwa untuk menyimpan karya buku dan seminar yang telah diisi dalam satu arsip yang rapi.",
+    "Kumpulan karya buku serta dokumentasi seminar dan workshop Ranah Jiwa.",
 }
 
 export default function ProductsPage() {

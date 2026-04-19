@@ -380,22 +380,22 @@ export const homeContent = {
   },
   servicesPreview: {
     eyebrow: "Layanan",
-    title: "Pilihan layanan yang jelas dan mudah dipahami",
+    title: "Layanan untuk mendampingi sesuai kebutuhan",
     description:
-      "Enam paket layanan ditampilkan di Home agar pengunjung langsung melihat seluruh pilihan yang tersedia.",
+      "Temukan pilihan layanan Ranah Jiwa, mulai dari mental health check up, konseling, asesmen psikologis, hingga psikoedukasi dan seminar.",
     detailLabel: "Lihat detail",
   },
   testimonials: {
     eyebrow: "Testimoni",
     title: "Cerita kecil dari proses yang terasa aman",
     description:
-      "Testimoni anonim ini membantu pengunjung baru merasa lebih tenang sebelum memulai langkah pertama.",
+      "Beberapa cerita singkat dari proses pendampingan bersama Ranah Jiwa.",
   },
   productsPreview: {
     eyebrow: "Produk",
     title: "Karya buku dan jejak seminar dalam satu halaman",
     description:
-      "Simpan dokumentasi karya buku dan seminar Ranah Jiwa di satu ruang yang lebih rapi, mudah dipindai, dan mudah ditambah nanti.",
+      "Temukan karya buku dan jejak seminar Ranah Jiwa dalam satu halaman.",
     ctaLabel: "Buka halaman Produk",
   },
   instagram: {
@@ -442,7 +442,7 @@ export const profilePageContent = {
     eyebrow: "Kualifikasi",
     title: "Pendidikan, pengalaman, dan sertifikasi",
     description:
-      "Disusun dalam kartu yang mudah dipindai agar pengunjung cepat membangun rasa percaya.",
+      "Latar pendidikan, pengalaman, dan sertifikasi yang membentuk cara kerja pendampingan di Ranah Jiwa.",
   },
   finalCta: {
     title: "Siap mulai dengan langkah yang terasa aman?",
@@ -458,7 +458,7 @@ export const servicesPageContent = {
     badge: "Layanan Kesehatan Mental",
     title: "Pendampingan Jiwa Berlandaskan Nilai Islami",
     description:
-      "Setiap paket dirancang agar pengunjung mudah memahami isi layanan, durasi, output, dan langkah berikutnya tanpa alur yang terasa rumit.",
+      "Setiap layanan dirancang untuk membantu Anda memahami kebutuhan, durasi, output, dan langkah pendampingan dengan lebih jelas.",
     quickStats: [
       { title: "6 paket", body: "Seluruh pilihan layanan inti Ranah Jiwa." },
       { title: "Mulai 30 menit", body: "Ada opsi check-up singkat hingga asesmen terarah." },
@@ -468,15 +468,15 @@ export const servicesPageContent = {
   },
   fullList: {
     eyebrow: "Paket layanan",
-    title: "Enam paket layanan yang mudah discan",
+    title: "Pilihan layanan Ranah Jiwa",
     description:
-      "Setiap kartu memuat nama paket, isi layanan, output, fee, dan CTA yang langsung mengarah ke booking atau WhatsApp.",
+      "Temukan layanan yang paling sesuai dengan kebutuhan Anda.",
   },
   notes: {
     eyebrow: "Catatan layanan",
     title: "Info penting sebelum booking",
     description:
-      "Catatan ini mengikuti keterangan pada poster layanan dan membantu pengunjung memahami alur dengan lebih jelas.",
+      "Mohon baca catatan layanan berikut sebelum booking.",
   },
   helpCta: {
     title: "Masih bingung memilih layanan?",
@@ -497,11 +497,11 @@ export const bookingPageContent = {
 export const productsPageContent = {
   hero: {
     badge: "Produk Ranah Jiwa",
-    title: "Ruang arsip untuk karya buku dan seminar yang telah diisi",
+    title: "Karya buku dan jejak seminar Ranah Jiwa",
     description:
-      "Halaman ini disiapkan untuk menyimpan karya buku Ranah Jiwa dan dokumentasi seminar agar lebih rapi, lebih mudah dilihat, dan lebih mudah diperbarui.",
+      "Kumpulan karya buku serta dokumentasi seminar dan workshop yang telah diisi oleh Ranah Jiwa.",
     quickStats: [
-      { title: `${books.length}`, body: "Karya buku yang sudah ditambahkan." },
+      { title: `${books.length}`, body: "Karya buku Ranah Jiwa." },
       { title: "20+", body: "Seminar dan workshop yang sudah terdokumentasi." },
     ],
   },
@@ -509,16 +509,16 @@ export const productsPageContent = {
     eyebrow: "Karya buku",
     title: "Buku dan karya tulis",
     description:
-      "Bagian ini disiapkan untuk menyimpan buku yang sudah dibuat. Datanya dibuat terpusat agar nanti mudah ditambah tanpa bongkar layout.",
-    emptyTitle: "Data buku belum ditambahkan",
+      "Kumpulan buku dan karya tulis yang telah diterbitkan atau didokumentasikan oleh Ranah Jiwa.",
+    emptyTitle: "Karya buku belum tersedia",
     emptyBody:
-      "Saat data karya buku sudah siap, bagian ini tinggal diisi dari content file tanpa perlu ubah struktur halaman lagi.",
+      "Saat ada karya buku baru, bagian ini akan diperbarui.",
   },
   seminars: {
     eyebrow: "Jejak seminar",
     title: "Seminar dan workshop yang telah diisi",
     description:
-      "Dokumentasi seminar dipindahkan ke halaman ini agar Home tetap fokus pada trust, layanan, dan konversi.",
+      "Dokumentasi seminar dan workshop yang telah diisi oleh Ranah Jiwa.",
   },
   finalCta: {
     title: "Punya kebutuhan seminar atau ingin bertanya soal karya Ranah Jiwa?",

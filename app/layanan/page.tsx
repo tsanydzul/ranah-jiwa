@@ -89,11 +89,6 @@ export default function ServicesPage() {
       </SiteSection>
 
       <SiteSection className="section-wash">
-        <SectionHeading
-          eyebrow={servicesPageContent.fullList.eyebrow}
-          title={servicesPageContent.fullList.title}
-          description={servicesPageContent.fullList.description}
-        />
         <div className="grid gap-6">
           {services.map((service) => {
             const Icon = iconMap[service.id]
