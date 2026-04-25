@@ -62,7 +62,7 @@ export default function HomePage() {
   return (
     <div className="space-y-18 py-8 md:space-y-24 md:py-12">
       <SiteSection className="section-wash">
-        <div className="hero-shell rounded-[2.7rem] border border-white/70 bg-organic-panel px-5 py-6 shadow-soft sm:px-6 md:px-8 md:py-8 lg:px-10">
+        <div className="hero-shell hero-shell-flat rounded-[2.7rem] border border-white/70 bg-white/88 px-5 py-6 shadow-soft sm:px-6 md:px-8 md:py-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-center">
             <div className="min-w-0 space-y-6">
               <Badge className="flex w-full max-w-full items-center justify-center rounded-full bg-primary/12 px-4 py-2 text-center text-[10px] leading-4 font-semibold tracking-[0.16em] text-primary uppercase whitespace-normal hover:bg-primary/12 sm:w-fit sm:max-w-fit sm:px-4 sm:text-xs sm:tracking-[0.24em]">

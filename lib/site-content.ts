@@ -95,7 +95,7 @@ export const siteConfig = {
 export const profileContent = {
   name: "Arina Nurul Badriyah, S.Psi., Psikolog",
   shortIntro:
-    "Mendampingi proses berbagi, refleksi, dan pemulihan dengan pendekatan yang hangat, terstruktur, dan tetap membumi.",
+    "Mendampingi proses berbagi, refleksi, dan pemulihan dengan pendekatan yang hangat, terstruktur, dan profesional.",
   longIntro: [
     "Halo, saya Arina Nurul Badriyah, S.Psi., Psikolog. Saya percaya setiap orang berhak memiliki ruang aman untuk menceritakan apa yang sedang dirasakan tanpa takut dihakimi.",
     "Dalam proses pendampingan, saya mengutamakan hubungan yang empatik, profesional, dan terpercaya agar klien dapat merasa didengar dan dipahami. Ranah Jiwa hadir untuk membantu Anda mengenali diri, merawat luka batin, dan bertumbuh dengan langkah yang terasa lebih ringan.",
@@ -326,7 +326,7 @@ export const seminars = [
     time: "10.00 WIB",
     price: "Investasi 50K",
     description:
-      "Workshop reflektif yang mengajak peserta berhenti sejenak, menulis dengan lebih sadar, dan merawat ruang batin dengan pendekatan yang hangat serta membumi.",
+      "Workshop reflektif yang mengajak peserta berhenti sejenak, menulis dengan lebih sadar, dan merawat ruang batin dengan pendekatan yang hangat serta profesional.",
     poster: "/seminar-journaling-mindfulness.jpg",
   },
 ] satisfies SeminarItem[]
@@ -422,7 +422,7 @@ export const homeContent = {
 }
 
 export const profilePageContent = {
-  heroBadge: "Psikolog - empatik - membumi",
+  heroBadge: "Psikolog - empatik - profesional",
   heroTitle: "Mendengar dengan hati, membimbing menuju pulih.",
   trustCards: [
     {

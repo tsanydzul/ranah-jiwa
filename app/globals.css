@@ -314,6 +314,10 @@
     pointer-events: none;
   }
 
+  .hero-shell-flat::before {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
   .paper-tag {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 243, 241, 0.88));
     box-shadow:

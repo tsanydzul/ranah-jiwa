@@ -55,7 +55,7 @@ export default function ProfilePage() {
                 Ranah Jiwa
               </p>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Psikologi yang hangat, profesional, dan membumi untuk anak, remaja, dan dewasa.
+                Psikologi yang hangat dan profesional untuk anak, remaja, dan dewasa.
               </p>
             </div>
           </div>
