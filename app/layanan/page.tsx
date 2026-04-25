@@ -23,9 +23,18 @@ import { cn } from "@/lib/utils"
 import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
-  title: "Layanan",
+  title: "Layanan Psikologi",
   description:
-    "Detail enam paket layanan Ranah Jiwa dengan isi layanan, durasi, output, fee, dan CTA yang jelas.",
+    "Lihat layanan psikologi Ranah Jiwa, mulai dari mental health check up, konseling, asesmen psikologis, hingga psikoedukasi dan seminar.",
+  alternates: {
+    canonical: "/layanan",
+  },
+  openGraph: {
+    title: "Layanan Psikologi | Ranah Jiwa",
+    description:
+      "Lihat layanan psikologi Ranah Jiwa, mulai dari mental health check up, konseling, asesmen psikologis, hingga psikoedukasi dan seminar.",
+    url: "/layanan",
+  },
 }
 
 const iconMap: Record<string, LucideIcon> = {

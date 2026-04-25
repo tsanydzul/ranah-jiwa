@@ -69,6 +69,7 @@ export type BookingFormData = {
 
 export const siteConfig = {
   brandName: "Ranah Jiwa",
+  siteUrl: "https://www.ranahjiwa.my.id",
   heroHeadline: "Ruang Aman untuk Memahami Diri & Bertumbuh",
   heroSubheadline:
     "Ranah Jiwa hadir sebagai ruang aman untuk berbagi, refleksi, dan memahami kehidupan batin. Tempat untuk merasa didengar, dipahami, dan bertumbuh bersama pendampingan profesional dan terpercaya.",

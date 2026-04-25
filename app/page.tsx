@@ -37,9 +37,18 @@ import { cn } from "@/lib/utils"
 import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Ruang Aman untuk Memahami Diri",
   description:
-    "Ruang aman untuk memahami diri, melihat layanan Ranah Jiwa, dan memulai langkah pertama lewat WhatsApp atau booking.",
+    "Ranah Jiwa menghadirkan ruang aman untuk berbagi, refleksi, dan bertumbuh lewat layanan psikologi yang hangat, profesional, dan terpercaya.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Ruang Aman untuk Memahami Diri | Ranah Jiwa",
+    description:
+      "Ranah Jiwa menghadirkan ruang aman untuk berbagi, refleksi, dan bertumbuh lewat layanan psikologi yang hangat, profesional, dan terpercaya.",
+    url: "/",
+  },
 }
 
 const serviceIcons: Record<string, LucideIcon> = {

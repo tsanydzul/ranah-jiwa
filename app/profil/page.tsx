@@ -20,9 +20,18 @@ import { cn } from "@/lib/utils"
 import { buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
-  title: "Profil",
+  title: "Profil Arina Nurul Badriyah, S.Psi., Psikolog",
   description:
     "Profil Arina Nurul Badriyah, S.Psi., Psikolog, beserta pendidikan, pengalaman, sertifikasi, dan cara memulai langkah pertama.",
+  alternates: {
+    canonical: "/profil",
+  },
+  openGraph: {
+    title: "Profil Arina Nurul Badriyah, S.Psi., Psikolog | Ranah Jiwa",
+    description:
+      "Kenali profil Arina Nurul Badriyah, S.Psi., Psikolog, beserta pendidikan, pengalaman, dan sertifikasi di Ranah Jiwa.",
+    url: "/profil",
+  },
 }
 
 const focusIcons = [HeartHandshake, Sparkles, UsersRound]

@@ -12,9 +12,17 @@ import { cn } from "@/lib/utils"
 import { buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
-  title: "Produk",
+  title: "Karya Buku dan Seminar",
   description:
     "Kumpulan karya buku serta dokumentasi seminar dan workshop Ranah Jiwa.",
+  alternates: {
+    canonical: "/produk",
+  },
+  openGraph: {
+    title: "Karya Buku dan Seminar | Ranah Jiwa",
+    description: "Kumpulan karya buku serta dokumentasi seminar dan workshop Ranah Jiwa.",
+    url: "/produk",
+  },
 }
 
 export default function ProductsPage() {

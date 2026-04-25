@@ -11,6 +11,17 @@ export const metadata: Metadata = {
   title: "Booking",
   description:
     "Isi data booking Ranah Jiwa, pilih layanan dan jadwal, lalu lanjut otomatis ke WhatsApp.",
+  alternates: {
+    canonical: "/booking",
+  },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
 }
 
 export default function BookingPage() {

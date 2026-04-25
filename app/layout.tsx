@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond, Manrope } from "next/font/google"
 
 import { SiteChrome } from "@/components/site/chrome"
+import { assetRefs, profileContent, siteConfig } from "@/lib/site-content"
 import "./globals.css"
 
 const bodyFont = Manrope({
@@ -16,12 +17,31 @@ const headingFont = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: "Ranah Jiwa",
     template: "%s | Ranah Jiwa",
   },
   description:
     "Ranah Jiwa adalah ruang aman untuk berbagi, refleksi, dan bertumbuh dengan layanan psikologi yang hangat, profesional, dan terpercaya.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: siteConfig.siteUrl,
+    siteName: siteConfig.brandName,
+    title: "Ranah Jiwa",
+    description:
+      "Ranah Jiwa adalah ruang aman untuk berbagi, refleksi, dan bertumbuh dengan layanan psikologi yang hangat, profesional, dan terpercaya.",
+    images: [
+      {
+        url: assetRefs.mainHero,
+        alt: profileContent.name,
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
