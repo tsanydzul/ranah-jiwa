@@ -112,6 +112,8 @@ export const profileContent = {
     "Freelancer Asesor SDM - K3PG Petrokimia Gresik",
     "Assistant Psychologist - RSI Nyai Ageng Pinatih Gresik",
     "Assistant Psychologist - Santya Anggraini Gresik",
+    "Psychologist & Therapist Special Needs Children - Lembaga Sebaya Riang",
+    "Trainer - Sinar Muda Indonesia",
     "Freelancer Tester - PALP (Assessment Center and Psychological Services) Surabaya",
     "Freelancer Tester - Adi Citra Mandiri Surabaya",
   ],
