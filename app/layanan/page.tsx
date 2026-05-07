@@ -41,9 +41,13 @@ const iconMap: Record<string, LucideIcon> = {
   annafisa: Brain,
   assyifa: Sparkles,
   assakinah: HeartHandshake,
-  attarbiyah: NotebookTabs,
-  "al-aqila": ClipboardCheck,
-  "al-ilmaa": UsersRound,
+  "ar-rahmah": HeartHandshake,
+  "al-wardah": UsersRound,
+  "at-tarbiyah": NotebookTabs,
+  "al-aql": ClipboardCheck,
+  "at-tazkiya": Sparkles,
+  "al-ilma": UsersRound,
+  "an-nahda": CalendarDays,
 }
 
 export default function ServicesPage() {

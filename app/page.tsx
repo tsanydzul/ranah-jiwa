@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Brain,
   CalendarDays,
+  Check,
   GraduationCap,
   HeartHandshake,
   MessageCircleHeart,
@@ -26,9 +27,9 @@ import {
   books,
   homeContent,
   profileContent,
-  profilePageContent,
   productsPageContent,
   services,
+  servicesPageContent,
   siteConfig,
   testimonials,
   trustStats,
@@ -55,9 +56,13 @@ const serviceIcons: Record<string, LucideIcon> = {
   annafisa: Brain,
   assyifa: Sparkles,
   assakinah: HeartHandshake,
-  attarbiyah: NotebookTabs,
-  "al-aqila": CalendarDays,
-  "al-ilmaa": UsersRound,
+  "ar-rahmah": HeartHandshake,
+  "al-wardah": UsersRound,
+  "at-tarbiyah": NotebookTabs,
+  "al-aql": Brain,
+  "at-tazkiya": Sparkles,
+  "al-ilma": UsersRound,
+  "an-nahda": CalendarDays,
 }
 
 export default function HomePage() {
@@ -123,11 +128,11 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid items-start gap-3 sm:grid-cols-3">
                 {trustStats.map((stat) => (
                   <Card
                     key={stat.label}
-                    className="hover-lift min-w-0 rounded-[1.75rem] border border-white/70 bg-white/80 shadow-soft"
+                    className="hover-lift min-w-0 self-start rounded-[1.75rem] border border-white/70 bg-white/80 shadow-soft"
                   >
                     <CardContent className="space-y-1 p-5">
                       <p className="font-heading text-3xl font-semibold text-primary">
@@ -165,29 +170,45 @@ export default function HomePage() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="space-y-2">
-                      <p className="font-heading text-3xl leading-none font-semibold text-foreground md:text-4xl">
+                    <div className="space-y-3">
+                      <p className="font-heading text-[2.55rem] leading-[0.94] font-semibold tracking-tight text-foreground sm:text-[2.9rem] md:text-4xl">
                         {profileContent.name}
                       </p>
+                      <div className="flex flex-wrap gap-2 text-[11px] font-semibold tracking-[0.14em] text-brand-purple uppercase">
+                        <span className="glass-pill rounded-full px-3 py-1.5">
+                          No. SILP: {profileContent.silpNumber}
+                        </span>
+                        <span className="glass-pill rounded-full px-3 py-1.5">
+                          No. STR: {profileContent.strNumber}
+                        </span>
+                      </div>
                       <p className="max-w-lg text-sm leading-6 text-muted-foreground">
                         {profileContent.identityCopy}
                       </p>
                     </div>
 
-                    <div className="grid gap-3 md:grid-cols-3">
-                      {profilePageContent.trustCards.map((item) => (
-                        <div
-                          key={item.title}
-                          className="paper-panel rounded-[1.5rem] p-4"
-                        >
-                          <p className="text-xs font-semibold tracking-[0.2em] text-brand-purple uppercase">
-                            {item.title}
-                          </p>
-                          <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                            {item.body}
-                          </p>
-                        </div>
-                      ))}
+                    <div className="paper-panel rounded-[1.65rem] p-4 sm:p-5">
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold tracking-[0.2em] text-brand-purple uppercase">
+                          {homeContent.heroFocus.title}
+                        </p>
+                        <p className="text-sm leading-6 text-muted-foreground">
+                          {homeContent.heroFocus.privacyNote}
+                        </p>
+                      </div>
+                      <div className="mt-3 grid gap-2">
+                        {homeContent.heroFocus.items.map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-start gap-2 rounded-[1rem] bg-white/62 px-3 py-2.5"
+                          >
+                            <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/12 text-primary">
+                              <Check className="size-3.5" />
+                            </span>
+                            <p className="text-sm leading-[1.55] text-muted-foreground">{item}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -198,81 +219,79 @@ export default function HomePage() {
       </SiteSection>
 
       <SiteSection className="section-wash">
-        <div className="mx-auto max-w-4xl">
-          <Card className="rounded-[2.2rem] border border-white/70 bg-white/82 shadow-soft">
-            <CardContent className="space-y-6 p-6 md:p-8">
-              <SectionHeading
-                eyebrow={homeContent.shortProfile.eyebrow}
-                title={profileContent.name}
-                description={profileContent.shortIntro}
+        <div className="hero-shell hero-shell-flat rounded-[2.7rem] border border-white/70 bg-white/88 px-6 py-6 shadow-soft md:px-8 md:py-8">
+          <div className="space-y-6">
+            <SectionHeading
+              eyebrow={homeContent.shortProfile.eyebrow}
+              title={profileContent.name}
+              description={profileContent.shortIntro}
+            />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <InfoTile
+                icon={GraduationCap}
+                title={homeContent.shortProfile.educationTitle}
+                body={profileContent.education.join(" - ")}
               />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <InfoTile
-                  icon={GraduationCap}
-                  title={homeContent.shortProfile.educationTitle}
-                  body={profileContent.education.join(" - ")}
-                />
-                <InfoTile
-                  icon={Sparkles}
-                  title={homeContent.shortProfile.approachTitle}
-                  body={homeContent.shortProfile.approachBody}
-                />
-              </div>
-              <p className="text-base leading-7 text-muted-foreground">
-                {profileContent.longIntro[0]}
-              </p>
-              <Link
-                href="/profil"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-11 rounded-full border-white/70 bg-white px-5"
-                )}
-              >
-                {homeContent.shortProfile.ctaLabel}
-                <ArrowRight className="size-4" />
-              </Link>
-            </CardContent>
-          </Card>
+              <InfoTile
+                icon={Sparkles}
+                title={homeContent.shortProfile.approachTitle}
+                body={homeContent.shortProfile.approachBody}
+              />
+            </div>
+            <p className="text-base leading-7 text-muted-foreground">
+              {profileContent.longIntro[0]}
+            </p>
+            <Link
+              href="/profil"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "h-11 rounded-full border-white/70 bg-white px-5"
+              )}
+            >
+              {homeContent.shortProfile.ctaLabel}
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
         </div>
       </SiteSection>
 
       <SiteSection className="section-wash">
         <SectionHeading
-          eyebrow={homeContent.servicesPreview.eyebrow}
-          title={homeContent.servicesPreview.title}
-          description={homeContent.servicesPreview.description}
+          eyebrow="Layanan Ranah Jiwa"
+          title={servicesPageContent.hero.title}
+          description={servicesPageContent.hero.description}
         />
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3">
+        <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-5">
           {services.map((service) => {
             const Icon = serviceIcons[service.id]
 
             return (
               <Card
                 key={service.id}
-                className="hover-lift min-w-[18rem] snap-start rounded-[2rem] border border-white/70 bg-white/84 shadow-soft md:min-w-0"
+                className="hover-lift min-w-[16rem] snap-start rounded-[1.7rem] border border-white/70 bg-white/84 shadow-soft md:min-w-0"
               >
-                <CardContent className="flex h-full flex-col gap-5 p-6">
-                  <div className="-mt-1 h-1.5 w-16 rounded-full bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))]" />
-                  <span className="inline-flex size-12 items-center justify-center rounded-full bg-primary/12 text-primary">
-                    <Icon className="size-5" />
+                <CardContent className="flex h-full flex-col gap-4 p-5">
+                  <div className="-mt-0.5 h-1.5 w-14 rounded-full bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))]" />
+                  <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary/12 text-primary">
+                    <Icon className="size-[18px]" />
                   </span>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div className="space-y-1">
-                      <p className="text-xs font-semibold tracking-[0.26em] text-brand-purple uppercase">
+                      <p className="text-[11px] font-semibold tracking-[0.24em] text-brand-purple uppercase">
                         {service.packageName}
                       </p>
-                      <h3 className="font-heading text-xl font-semibold text-foreground">
+                      <h3 className="font-heading text-[1.7rem] leading-[1.02] font-semibold text-foreground">
                         {service.title}
                       </h3>
                     </div>
-                    <p className="text-sm leading-6 text-muted-foreground">{service.summary}</p>
+                    <p className="text-sm leading-[1.65] text-muted-foreground">{service.summary}</p>
                   </div>
-                  <div className="mt-auto flex flex-col gap-3">
+                  <div className="mt-auto flex flex-col gap-2.5 pt-1">
                     <Link
                       href={buildBookingPath(service.packageName)}
                       className={cn(
                         buttonVariants({ size: "lg" }),
-                        "h-11 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-primary-foreground"
+                        "h-10 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-sm text-primary-foreground"
                       )}
                     >
                       {service.ctaLabel}

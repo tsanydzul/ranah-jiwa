@@ -181,14 +181,47 @@ export default function ProductsPage() {
               className="hover-lift rounded-[2.35rem] border border-white/70 bg-white/84 shadow-soft"
             >
               <CardContent className="grid gap-5 p-5 md:p-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-                <div className="overflow-hidden rounded-[1.9rem] bg-brand-soft p-3">
-                  <Image
-                    src={seminar.poster}
-                    alt={seminar.title}
-                    width={800}
-                    height={800}
-                    className="h-full w-full rounded-[1.35rem] object-cover"
-                  />
+                <div className="space-y-3">
+                  <div className="overflow-hidden rounded-[1.9rem] bg-brand-soft p-3">
+                    <Image
+                      src={seminar.poster}
+                      alt={seminar.title}
+                      width={800}
+                      height={1100}
+                      className="h-auto w-full rounded-[1.35rem] object-contain"
+                    />
+                  </div>
+                  {(seminar.registrationHref || seminar.whatsappTopic) ? (
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {seminar.registrationHref && seminar.registrationLabel ? (
+                        <a
+                          href={seminar.registrationHref}
+                          rel="noreferrer"
+                          target="_blank"
+                          className={cn(
+                            buttonVariants({ variant: "outline", size: "lg" }),
+                            "h-11 rounded-full border-white/70 bg-white/92 px-5 text-sm"
+                          )}
+                        >
+                          {seminar.registrationLabel}
+                        </a>
+                      ) : null}
+                      {seminar.whatsappTopic ? (
+                        <a
+                          href={buildWhatsAppUrl(buildInquiryMessage(seminar.whatsappTopic))}
+                          rel="noreferrer"
+                          target="_blank"
+                          className={cn(
+                            buttonVariants({ size: "lg" }),
+                            "h-11 rounded-full border-0 bg-whatsapp px-5 text-sm text-white shadow-[0_16px_36px_rgba(37,211,102,0.22)] hover:bg-whatsapp/90"
+                          )}
+                        >
+                          <MessageCircleHeart className="size-4" />
+                          WhatsApp
+                        </a>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="space-y-5">
@@ -196,6 +229,11 @@ export default function ProductsPage() {
                     <span className="glass-pill rounded-full px-4 py-2 text-xs font-semibold tracking-[0.16em] text-brand-purple uppercase">
                       Seminar 0{index + 1}
                     </span>
+                    {seminar.isUpcoming ? (
+                      <span className="rounded-full bg-amber-100 px-4 py-2 text-xs font-semibold tracking-[0.16em] text-amber-800 uppercase">
+                        Cooming Soon
+                      </span>
+                    ) : null}
                     <span className="glass-pill rounded-full px-4 py-2 text-xs font-semibold tracking-[0.16em] text-brand-purple uppercase">
                       {seminar.audience}
                     </span>

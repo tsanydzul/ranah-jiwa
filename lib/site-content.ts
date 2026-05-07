@@ -42,6 +42,10 @@ export type SeminarItem = {
   price: string
   description: string
   poster: string
+  registrationHref?: string
+  registrationLabel?: string
+  whatsappTopic?: string
+  isUpcoming?: boolean
 }
 
 export type BookItem = {
@@ -95,6 +99,8 @@ export const siteConfig = {
 
 export const profileContent = {
   name: "Arina Nurul Badriyah, S.Psi., Psikolog",
+  silpNumber: "DD333F4F05B8",
+  strNumber: "20252371-2026-0309",
   shortIntro:
     "Mendampingi proses berbagi, refleksi, dan pemulihan dengan pendekatan yang hangat, terstruktur, dan profesional.",
   longIntro: [
@@ -103,18 +109,17 @@ export const profileContent = {
   ],
   identityCopy:
     "Psikolog yang menghadirkan ruang hangat untuk berbagi, refleksi, dan bertumbuh tanpa rasa dihakimi.",
-  focusAreas: ["Anak", "Remaja", "Dewasa"],
+  focusAreas: ["Anak", "Remaja", "Dewasa", "Komunitas"],
   education: [
     "S1 Psikologi UIN Sunan Ampel Surabaya",
     "Pendidikan Profesi Psikologi Universitas 17 Agustus 1945 Surabaya",
   ],
   experience: [
-    "Freelancer Asesor SDM - K3PG Petrokimia Gresik",
-    "Assistant Psychologist - RSI Nyai Ageng Pinatih Gresik",
-    "Assistant Psychologist - Santya Anggraini Gresik",
+    "Freelancer Assesor SDM - K3PG Petrokimia Gresik",
     "Psychologist & Therapist Special Needs Children - Lembaga Sebaya Riang",
-    "Trainer - Sinar Muda Indonesia",
-    "Freelancer Tester - PALP (Assessment Center and Psychological Services) Surabaya",
+    "Mentor & Trainer - Sinar Muda Indonesia",
+    "Assistant Psychologist - RSI Nyai Ageng Pinatih Gresik & Biro Psikologi Santya Anggraini Gresik",
+    "Psychological Staff - PALP (Assessment Center and Psychological Services) UINSA Surabaya",
     "Freelancer Tester - Adi Citra Mandiri Surabaya",
   ],
   certifications: [
@@ -207,34 +212,28 @@ export const services = [
     id: "annafisa",
     packageName: "Annafisa",
     title: "Mental Health Check Up",
-    summary: "Paket deteksi dini kondisi mental yang ringan, cepat, dan terstruktur.",
+    summary: "Pemeriksaan awal untuk membantu mengenali kondisi psikologis secara lebih terarah.",
     description:
-      "Cocok untuk langkah awal mengenali kondisi psikologis seperti kecemasan, stress, depresi, dan dinamika emosi lain sebelum menentukan pendampingan berikutnya.",
-    bullets: [
-      "Pemeriksaan deteksi dini kondisi mental: kecemasan, stress, depresi, dsb.",
-    ],
-    duration: "30 menit",
-    outputs: ["Hasil Pemeriksaan MHCU (pdf)"],
+      "Pemeriksaan awal untuk membantu mengenali kondisi psikologis seperti kecemasan, stres, suasana hati, serta kondisi emosional lainnya.",
+    bullets: ["Pemeriksaan awal kondisi psikologis dan emosi."],
+    duration: "±30 menit",
+    outputs: ["Hasil pemeriksaan", "Laporan hasil & rekomendasi awal"],
     fee: "Rp 179.999",
     ctaLabel: "Booking Annafisa",
   },
   {
     id: "assyifa",
     packageName: "Assyifa",
-    title: "Konseling Mental Health Check Up",
-    summary:
-      "Check-up mental plus sesi lanjut untuk membantu membaca hasil secara lebih personal.",
+    title: "Konseling MHCU",
+    summary: "Paket pendampingan awal untuk memahami kondisi diri dan mendapatkan arahan.",
     description:
-      "Paket ini menggabungkan pemeriksaan awal dan satu sesi konseling individu agar hasil tidak berhenti di laporan, tetapi bisa langsung dibahas bersama psikolog.",
+      "Paket pendampingan awal yang membantu memahami kondisi diri sekaligus mendapatkan arahan melalui sesi konseling.",
     bullets: [
-      "Pemeriksaan deteksi dini kondisi mental: kecemasan, stress, depresi, dsb.",
-      "1x sesi konseling individu selama 45 menit.",
+      "Mental Health Check Up (±30 menit)",
+      "1x sesi konseling individu (±60 menit)",
     ],
-    duration: "30 menit",
-    outputs: [
-      "Hasil Pemeriksaan MHCU (pdf)",
-      "1x sesi konseling individu selama 45 menit",
-    ],
+    duration: "±30 menit + ±60 menit",
+    outputs: ["Hasil pemeriksaan", "Laporan hasil & rekomendasi"],
     fee: "Rp 299.999",
     ctaLabel: "Booking Assyifa",
   },
@@ -243,73 +242,175 @@ export const services = [
     packageName: "Assakinah",
     title: "Konseling Individu",
     summary:
-      "Pendampingan psikologis hangat untuk isu pribadi, keluarga, pengasuhan, hingga pranikah.",
+      "Pendampingan psikologis untuk memahami diri, emosi, dan permasalahan hidup secara lebih utuh.",
     description:
-      "Ruang aman untuk berbagi dan merefleksikan isu yang sedang dihadapi dengan pendampingan profesional dan terpercaya.",
+      "Pendampingan psikologis untuk membantu memahami diri, emosi, dan permasalahan hidup secara lebih utuh dalam ruang yang aman.",
     bullets: [
-      "Pendampingan psikologis untuk isu atau keluhan pribadi, keluarga, pengasuhan, pranikah, dan dinamika lain yang sedang dihadapi.",
+      "Pendampingan psikologis individu dalam ruang yang aman.",
+      "Tersedia online & offline.",
     ],
-    duration: "60 menit",
+    duration: "±60 menit",
+    outputs: ["Laporan hasil & rekomendasi"],
     fee: "Rp 249.999",
     ctaLabel: "Booking Assakinah",
   },
   {
-    id: "attarbiyah",
-    packageName: "Attarbiyah",
+    id: "ar-rahmah",
+    packageName: "Ar-Rahmah",
+    title: "Konseling Pasangan / Couple",
+    summary:
+      "Pendampingan bagi pasangan untuk memahami dinamika hubungan dan membangun komunikasi yang lebih sehat.",
+    description:
+      "Pendampingan bagi pasangan untuk memahami dinamika hubungan, meningkatkan komunikasi, serta menyelesaikan konflik secara sehat. Layanan ini dapat digunakan untuk pasangan pra-nikah maupun pasangan dalam pernikahan.",
+    bullets: [
+      "1 sesi individu (perempuan)",
+      "1 sesi individu (laki-laki)",
+      "1 sesi bersama pasangan",
+      "Tersedia online & offline.",
+    ],
+    duration: "±60 menit / sesi",
+    outputs: ["Laporan hasil & rekomendasi"],
+    fee: "Rp 649.999",
+    ctaLabel: "Booking Ar-Rahmah",
+  },
+  {
+    id: "al-wardah",
+    packageName: "Al-Wardah",
+    title: "Konseling Orang Tua & Anak",
+    summary:
+      "Pendampingan untuk membantu orang tua memahami kebutuhan anak dan membangun hubungan yang lebih sehat.",
+    description:
+      "Pendampingan untuk membantu orang tua memahami kebutuhan anak serta membangun hubungan yang lebih sehat. Cocok untuk konsultasi permasalahan perilaku anak, relasi orang tua & anak, pola asuh, dan lainnya.",
+    bullets: [
+      "Cocok untuk perilaku anak, relasi orang tua & anak, pola asuh, dan lainnya.",
+      "Tersedia online & offline.",
+    ],
+    duration: "±60 menit",
+    outputs: ["Laporan hasil & rekomendasi"],
+    fee: "Rp 199.999",
+    ctaLabel: "Booking Al-Wardah",
+  },
+  {
+    id: "at-tarbiyah",
+    packageName: "At-Tarbiyah",
     title: "Screening Tumbuh Kembang Anak",
     summary:
-      "Layanan skrining awal untuk melihat tumbuh kembang anak dan deteksi dini kebutuhan khusus.",
+      "Pemeriksaan untuk mendeteksi tumbuh kembang anak serta potensi anak berkebutuhan khusus sejak dini.",
     description:
-      "Paket ini membantu orang tua mendapatkan gambaran awal tumbuh kembang anak secara lebih terarah sebelum melangkah ke intervensi berikutnya.",
+      "Pemeriksaan untuk mendeteksi tumbuh kembang anak serta potensi anak berkebutuhan khusus sejak dini.",
     bullets: [
-      "Screening tumbuh kembang anak selama 60 menit.",
-      "Deteksi dini kondisi anak berkebutuhan khusus.",
+      "Screening tumbuh kembang anak.",
+      "Deteksi dini potensi anak berkebutuhan khusus.",
     ],
-    duration: "60 menit",
-    outputs: ["Hasil Pemeriksaan (pdf) + Rekomendasi awal"],
-    fee: "Rp 249.999",
-    ctaLabel: "Booking Attarbiyah",
+    duration: "±60 menit",
+    outputs: ["Laporan hasil & rekomendasi awal"],
+    fee: "Mulai Rp 179.999 / anak",
+    serviceNotes: [
+      "Individual: Rp 219.999",
+      "Group (minimal 10 anak): Rp 179.999 / anak",
+    ],
+    ctaLabel: "Booking At-Tarbiyah",
   },
   {
-    id: "al-aqila",
-    packageName: "Al-'Aqila",
+    id: "al-aql",
+    packageName: "Al-'Aql",
     title: "Asesmen Psikologis",
     summary:
-      "Asesmen psikologis terstruktur untuk kebutuhan belajar, potensi, dan pemetaan diri.",
+      "Pemeriksaan psikologis untuk memahami potensi, kemampuan, dan karakteristik individu secara lebih mendalam.",
     description:
-      "Paket asesmen ini membantu memetakan kemampuan, karakter, dan kebutuhan klien melalui rangkaian pemeriksaan yang relevan dengan tujuan pemeriksaan.",
+      "Pemeriksaan psikologis untuk memahami potensi, kemampuan, dan karakteristik individu secara lebih mendalam.",
     bullets: [
-      "Tes IQ, Tes Kepribadian, Bakat Minat, Kesiapan Sekolah, Gaya Belajar, dll.",
+      "Tes IQ -> Rp 299.999 - 499.999",
+      "Tes Kepribadian -> Rp 149.999",
+      "Tes Minat & Bakat -> Rp 279.999",
+      "Tes Kesiapan Sekolah -> Rp 249.999",
+      "Tes Gaya Belajar -> Rp 149.999",
+      "Tes Gaya & Sikap Kerja -> Rp 299.999",
     ],
-    duration: "60-90 menit",
-    outputs: ["Hasil Pemeriksaan (pdf) + Rekomendasi awal"],
-    fee: "Rp 299.999",
-    serviceNotes: ["Pemaparan dilakukan offline selama 60-90 menit."],
-    ctaLabel: "Booking Al-'Aqila",
+    duration: "±60-90 menit",
+    outputs: ["Laporan hasil & rekomendasi"],
+    fee: "Rp 149.999 - Rp 499.999",
+    serviceNotes: ["Layanan tersedia sesuai kebutuhan instansi / klien."],
+    ctaLabel: "Booking Al-'Aql",
   },
   {
-    id: "al-ilmaa",
-    packageName: "Al-'Ilmaa",
-    title: "Psikoedukasi / Seminar",
+    id: "at-tazkiya",
+    packageName: "At-Tazkiya",
+    title: "Terapi Psikologis",
     summary:
-      "Program edukasi pilihan untuk komunitas, sekolah, orang tua, dan institusi.",
+      "Pendampingan psikologis berkelanjutan untuk proses pemulihan dan perubahan yang lebih mendalam.",
     description:
-      "Layanan seminar dan psikoedukasi dengan materi yang bisa disesuaikan dengan kebutuhan audiens agar tetap relevan, hangat, dan mudah diterapkan.",
-    bullets: ["Materi pilihan: Manajemen stress, Parenting, Bakat Minat, dsb."],
-    duration: "60 menit",
-    fee: "Rp 499.999",
-    ctaLabel: "Booking Al-'Ilmaa",
+      "Pendampingan psikologis berkelanjutan untuk membantu proses pemulihan dan perubahan yang lebih mendalam. Dilakukan dengan metode terapi yang disesuaikan dengan kebutuhan klien.",
+    bullets: [
+      "Metode disesuaikan: forgiveness therapy, Islamic phototherapy, acceptance commitment therapy, dll.",
+    ],
+    duration: "±60 menit",
+    outputs: ["Laporan perkembangan & rekomendasi lanjutan"],
+    fee: "Rp 299.999",
+    ctaLabel: "Booking At-Tazkiya",
+  },
+  {
+    id: "al-ilma",
+    packageName: "Al-Ilma",
+    title: "Seminar / Workshop",
+    summary:
+      "Layanan edukasi psikologi untuk kelompok besar dengan fokus pada wawasan dan awareness.",
+    description:
+      "Layanan edukasi psikologi untuk kelompok besar dengan fokus pada penyampaian materi, peningkatan wawasan, dan awareness. Cocok untuk sekolah, komunitas, maupun instansi.",
+    bullets: [
+      "Peserta tidak terbatas (puluhan hingga ratusan).",
+      "Durasi ±1-3 jam (fleksibel).",
+    ],
+    duration: "±1-3 jam",
+    outputs: ["Insight, pemahaman, dan materi edukatif"],
+    fee: "By agreement",
+    serviceNotes: ["Fee menyesuaikan durasi, topik, dan kebutuhan acara."],
+    ctaLabel: "Booking Al-Ilma",
+  },
+  {
+    id: "an-nahda",
+    packageName: "An-Nahda",
+    title: "Mentoring / Coaching",
+    summary:
+      "Pendampingan personal dan interaktif untuk arahan, solusi, dan pengembangan diri yang lebih mendalam.",
+    description:
+      "Pendampingan yang lebih personal dan interaktif untuk membantu peserta mendapatkan arahan, solusi, serta pengembangan diri secara lebih mendalam. Cocok untuk individu atau kelompok kecil.",
+    bullets: [
+      "Peserta terbatas: individu / kelompok kecil.",
+      "Tersedia kelas intensif (1-3 orang), kelas super (4-10 orang), atau mini workshop (>10 orang).",
+    ],
+    duration: "±60-90 menit",
+    outputs: ["Insight personal, arahan praktis & rekomendasi pengembangan diri"],
+    fee: "By agreement",
+    serviceNotes: ["Fee menyesuaikan durasi, topik, dan kebutuhan acara."],
+    ctaLabel: "Booking An-Nahda",
   },
 ] satisfies ServiceItem[]
 
 export const serviceNotes = [
-  "Fee dapat berubah sesuai konteks, kebutuhan layanan, dan kesepakatan bersama.",
-  "Layanan bisa menyesuaikan permintaan dan kondisi via online maupun offline.",
-  "Di luar area Gresik belum termasuk biaya transportasi.",
-  "Jadwal yang sudah disepakati, pembatalan maksimal H-1 atau 24 jam sebelumnya.",
+  "Biaya layanan dapat berubah sesuai kebutuhan dan kesepakatan bersama.",
+  "Layanan tersedia secara online maupun offline menyesuaikan ketersediaan jadwal psikolog.",
+  "Tersedia layanan home service di luar biaya transportasi.",
+  "Pembatalan atau reschedule maksimal H-1 sebelum jadwal layanan.",
+  "Seluruh layanan bersifat rahasia dan profesional.",
 ]
 
 export const seminars = [
+  {
+    title: "Takut Salah Jurusan?",
+    subtitle: "Career Mentoring Class untuk bantu kenal diri dan menemukan arah jurusan yang lebih jelas.",
+    audience: "Pelajar, guru BK, dan orang tua",
+    date: "6 Juni 2026",
+    time: "15.00 WIB - selesai",
+    price: "Single 50K | Bundling bestie 90K / 2 orang",
+    description:
+      "Kelas kecil bersama Psikolog untuk mengenali potensi dan minat diri, mendapat gambaran arah jurusan yang lebih cocok, belajar menyusun SMART Goal, serta menikmati sharing santai dan mini consultation langsung dengan Psikolog. Bonus worksheet eksplorasi diri, e-certificate, dan giveaway menarik. Slot terbatas maksimal 10 peserta dan dilaksanakan offline di Dapur Kilen Gresik.",
+    poster: "/seminar-takut-salah-jurusan.jpeg",
+    registrationHref: "https://forms.gle/Qvhc2MeSJGotSFrs7",
+    registrationLabel: "Daftar di sini",
+    whatsappTopic: "Career Mentoring Class Takut Salah Jurusan",
+    isUpcoming: true,
+  },
   {
     title: "Ramadhan as a Mental Reset",
     subtitle: "Membangun kebiasaan mental yang lebih sehat sepanjang bulan Ramadhan.",
@@ -374,12 +475,26 @@ export const homeContent = {
     },
   ],
   shortProfile: {
-    eyebrow: "Tentang singkat",
+    eyebrow: "Profil singkat",
     approachTitle: "Pendekatan",
     approachBody:
       "Empatik, relevan, dan mudah dipahami agar klien merasa aman sejak awal.",
     educationTitle: "Latar pendidikan",
     ctaLabel: "Lihat Profil Lengkap",
+  },
+  heroFocus: {
+    title: "Fokus & Ketertarikan Isu",
+    items: [
+      "Pendampingan dengan pendekatan psikologis dan spiritual",
+      "Kecemasan, stres & burnout",
+      "Depresi & proses berduka",
+      "Pengembangan diri & penyesuaian hidup",
+      "Relasi & pola hubungan",
+      "Luka batin, inner child, & forgiveness",
+      "Perilaku adiktif & maladaptif",
+      "Neurodivergent (ADHD, Autism, Dyslexia)",
+    ],
+    privacyNote: "Privasi klien dijaga dan proses berjalan profesional.",
   },
   servicesPreview: {
     eyebrow: "Layanan",
@@ -458,15 +573,15 @@ export const profilePageContent = {
 
 export const servicesPageContent = {
   hero: {
-    badge: "Layanan Kesehatan Mental",
-    title: "Pendampingan Jiwa Berlandaskan Nilai Islami",
+    badge: "Layanan Ranah Jiwa",
+    title: "Pendampingan Jiwa dengan Pendekatan Spirituallitas",
     description:
-      "Setiap layanan dirancang untuk membantu Anda memahami kebutuhan, durasi, output, dan langkah pendampingan dengan lebih jelas.",
+      "Pilihan layanan Ranah Jiwa dirancang untuk membantu Anda mengenali kebutuhan, memahami bentuk pendampingan, dan memilih langkah yang paling sesuai.",
     quickStats: [
-      { title: "6 paket", body: "Seluruh pilihan layanan inti Ranah Jiwa." },
-      { title: "Mulai 30 menit", body: "Ada opsi check-up singkat hingga asesmen terarah." },
-      { title: "Hasil dan rekomendasi", body: "Output jelas untuk paket pemeriksaan dan asesmen." },
-      { title: "Online / Offline", body: "Pelaksanaan menyesuaikan konteks dan kebutuhan." },
+      { title: "10 layanan", body: "Pilihan layanan dari check up hingga coaching." },
+      { title: "Mulai 30 menit", body: "Ada layanan singkat hingga pendampingan lebih mendalam." },
+      { title: "Online / Offline", body: "Pelaksanaan menyesuaikan kebutuhan dan jadwal." },
+      { title: "Home service", body: "Tersedia sesuai konteks, di luar biaya transportasi." },
     ],
   },
   fullList: {

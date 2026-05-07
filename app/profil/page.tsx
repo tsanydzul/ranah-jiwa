@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
+  BriefcaseBusiness,
   GraduationCap,
   HeartHandshake,
   Medal,
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   },
 }
 
-const focusIcons = [HeartHandshake, Sparkles, UsersRound]
+const focusIcons = [HeartHandshake, Sparkles, BriefcaseBusiness, UsersRound]
 
 export default function ProfilePage() {
   const whatsappHref = buildWhatsAppUrl(buildInquiryMessage("profil dan konsultasi"))
@@ -56,16 +57,15 @@ export default function ProfilePage() {
                   priority
                   className="editorial-frame h-auto w-full object-cover object-top"
                 />
+                <div className="paper-tag absolute right-4 bottom-4 z-10 max-w-[16rem] rounded-[1.8rem] p-4">
+                  <p className="text-xs font-semibold tracking-[0.22em] text-brand-purple uppercase">
+                    Ranah Jiwa
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    Psikologi yang hangat dan profesional untuk anak, remaja, dan dewasa.
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="paper-tag -mt-10 ml-auto max-w-[16rem] rounded-[1.8rem] p-4">
-              <p className="text-xs font-semibold tracking-[0.22em] text-brand-purple uppercase">
-                Ranah Jiwa
-              </p>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Psikologi yang hangat dan profesional untuk anak, remaja, dan dewasa.
-              </p>
             </div>
           </div>
 
@@ -140,10 +140,10 @@ export default function ProfilePage() {
             <CardContent className="space-y-8 p-6 md:p-8">
               <div>
                 <CardTitle className="font-heading text-2xl font-semibold">
-                  Riwayat pendidikan
+                  Perjalanan Karir
                 </CardTitle>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Riwayat pendidikan dan pengalaman profesional.
+                  Riwayat Pendidikan & Pengalaman Profesional
                 </p>
               </div>
 
@@ -178,28 +178,33 @@ export default function ProfilePage() {
                     Area fokus
                   </CardTitle>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    Pendampingan untuk anak, remaja, dan dewasa.
+                    Pendampingan untuk anak, remaja, dewasa, dan komunitas.
                   </p>
                 </div>
-                <div className="grid gap-4">
+                <div className="space-y-3">
                   {profileContent.focusAreas.map((item, index) => {
                     const Icon = focusIcons[index]
 
                     return (
-                      <div key={item} className="rounded-[1.8rem] bg-brand-soft/85 p-5">
+                      <div
+                        key={item}
+                        className="rounded-[1.35rem] border border-white/70 bg-brand-soft/70 px-4 py-3.5"
+                      >
                         <div className="flex items-start gap-4">
-                          <span className="inline-flex size-11 items-center justify-center rounded-full bg-white text-brand-purple shadow-soft">
-                            <Icon className="size-5" />
+                          <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-brand-purple shadow-soft">
+                            <Icon className="size-4.5" />
                           </span>
                           <div>
                             <p className="font-semibold text-foreground">{item}</p>
-                            <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                            <p className="mt-1 text-sm leading-5.5 text-muted-foreground">
                               {item === "Anak" &&
                                 "Pendampingan awal yang lembut untuk memahami tumbuh kembang dan kebutuhan emosi anak."}
                               {item === "Remaja" &&
                                 "Ruang aman untuk dinamika identitas, relasi, dan perubahan emosi di masa remaja."}
                               {item === "Dewasa" &&
-                                "Pendampingan untuk relasi, pekerjaan, pemulihan batin, dan proses bertumbuh yang lebih stabil."}
+                                "Pendampingan untuk relasi, pekerjaan, pernikahan/pranikah, pemulihan batin, dan proses bertumbuh yang lebih stabil."}
+                              {item === "Komunitas" &&
+                                "Pendampingan dan edukasi psikologis untuk kelompok, organisasi, atau komunitas dalam membangun kesehatan mental bersama."}
                             </p>
                           </div>
                         </div>
