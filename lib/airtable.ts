@@ -55,6 +55,36 @@ function lines(field: unknown): string[] {
     .filter(Boolean)
 }
 
+/**
+ * Resolve an ImageBB URL to a direct image URL.
+ * - If already a direct i.ibb.co URL, return as-is.
+ * - If a share page (ibb.co/xxx), fetch the page and extract og:image.
+ */
+async function resolveImageUrl(url: string): Promise<string> {
+  if (!url) return ""
+  if (url.includes("i.ibb.co")) return url
+
+  try {
+    const pageUrl = url.startsWith("//") ? `https:${url}` : url
+    const res = await fetch(pageUrl, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+      next: { revalidate: 86400 },
+    })
+    if (!res.ok) return url
+    const html = await res.text()
+    const match = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)
+      || html.match(/<link[^>]+rel=["']image_src["'][^>]+href=["']([^"']+)["']/i)
+    if (match?.[1]) {
+      const resolved = match[1].startsWith("//") ? `https:${match[1]}` : match[1]
+      return resolved
+    }
+  } catch {
+    // fall through
+  }
+  return url
+}
+
 // ── Typed fetchers ──────────────────────────────────────────────
 
 export interface AirtableService {
@@ -101,16 +131,19 @@ export interface AirtableSeminar {
 
 export async function fetchSeminars(): Promise<AirtableSeminar[]> {
   const rows = await fetchTable("Seminar")
-  return rows.map((r) => ({
-    title: String(r.fields.Judul ?? ""),
-    subtitle: String(r.fields.Subjudul ?? ""),
-    audience: String(r.fields.Audiens ?? ""),
-    date: String(r.fields.Tanggal ?? ""),
-    time: String(r.fields.Waktu ?? ""),
-    price: String(r.fields.Harga ?? ""),
-    description: String(r.fields.Deskripsi ?? ""),
-    poster: String(r.fields.Poster ?? ""),
-  }))
+  const seminars = await Promise.all(
+    rows.map(async (r) => ({
+      title: String(r.fields.Judul ?? ""),
+      subtitle: String(r.fields.Subjudul ?? ""),
+      audience: String(r.fields.Audiens ?? ""),
+      date: String(r.fields.Tanggal ?? ""),
+      time: String(r.fields.Waktu ?? ""),
+      price: String(r.fields.Harga ?? ""),
+      description: String(r.fields.Deskripsi ?? ""),
+      poster: await resolveImageUrl(String(r.fields.Poster ?? "")),
+    }))
+  )
+  return seminars
 }
 
 export interface AirtableBook {
@@ -126,16 +159,19 @@ export interface AirtableBook {
 
 export async function fetchBooks(): Promise<AirtableBook[]> {
   const rows = await fetchTable("Buku")
-  return rows.map((r) => ({
-    title: String(r.fields.Judul ?? ""),
-    subtitle: String(r.fields.Subjudul ?? ""),
-    description: String(r.fields.Deskripsi ?? ""),
-    cover: String(r.fields.Sampul ?? ""),
-    year: String(r.fields.Tahun ?? ""),
-    publisher: String(r.fields.Penerbit ?? ""),
-    ctaLabel: String(r.fields.LabelCTA ?? ""),
-    ctaHref: String(r.fields.LinkCTA ?? ""),
-  }))
+  const books = await Promise.all(
+    rows.map(async (r) => ({
+      title: String(r.fields.Judul ?? ""),
+      subtitle: String(r.fields.Subjudul ?? ""),
+      description: String(r.fields.Deskripsi ?? ""),
+      cover: await resolveImageUrl(String(r.fields.Sampul ?? "")),
+      year: String(r.fields.Tahun ?? ""),
+      publisher: String(r.fields.Penerbit ?? ""),
+      ctaLabel: String(r.fields.LabelCTA ?? ""),
+      ctaHref: String(r.fields.LinkCTA ?? ""),
+    }))
+  )
+  return books
 }
 
 export interface AirtableTestimonial {
