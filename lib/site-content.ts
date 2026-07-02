@@ -1,3 +1,5 @@
+import { fetchBooks, fetchSeminars, fetchServices, fetchTestimonials } from "@/lib/airtable"
+
 export type NavItem = {
   href: string
   label: string
@@ -536,4 +538,30 @@ export function findServiceByPackageName(packageName: string | null) {
   if (!packageName) return undefined
 
   return services.find((service) => service.packageName === packageName)
+}
+
+// ── Async getters (Airtable → static fallback) ─────────────────
+
+export async function getServices() {
+  const fromAirtable = await fetchServices()
+  if (fromAirtable.length > 0) return fromAirtable
+  return services
+}
+
+export async function getSeminars() {
+  const fromAirtable = await fetchSeminars()
+  if (fromAirtable.length > 0) return fromAirtable
+  return seminars
+}
+
+export async function getBooks() {
+  const fromAirtable = await fetchBooks()
+  if (fromAirtable.length > 0) return fromAirtable
+  return books
+}
+
+export async function getTestimonials() {
+  const fromAirtable = await fetchTestimonials()
+  if (fromAirtable.length > 0) return fromAirtable
+  return testimonials
 }

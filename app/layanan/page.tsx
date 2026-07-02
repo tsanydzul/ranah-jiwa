@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { serviceNotes, services, servicesPageContent } from "@/lib/site-content"
+import { getServices, serviceNotes, servicesPageContent } from "@/lib/site-content"
 import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
@@ -26,7 +26,8 @@ const serviceIcons: Record<string, string> = {
   "al-ilmaa": "ri-presentation-line",
 }
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices()
   const consultationHref = buildWhatsAppUrl(buildInquiryMessage("layanan yang paling sesuai"))
 
   return (

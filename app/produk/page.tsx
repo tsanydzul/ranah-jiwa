@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
-import { books, productsPageContent, seminars } from "@/lib/site-content"
+import { getBooks, getSeminars, productsPageContent } from "@/lib/site-content"
 import { buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
@@ -17,7 +17,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const books = await getBooks()
+  const seminars = await getSeminars()
   const consultationHref = buildWhatsAppUrl(buildInquiryMessage("produk, buku, atau seminar"))
 
   return (

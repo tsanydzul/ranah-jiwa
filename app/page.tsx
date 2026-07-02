@@ -5,13 +5,13 @@ import Link from "next/link"
 import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 import {
   assetRefs,
-  books,
+  getBooks,
+  getServices,
+  getTestimonials,
   homeContent,
   profileContent,
   productsPageContent,
-  services,
   siteConfig,
-  testimonials,
   trustStats,
 } from "@/lib/site-content"
 
@@ -45,7 +45,10 @@ const focusList = [
   "Neurodivergent (ADHD, Autism, Dyslexia)",
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const services = await getServices()
+  const books = await getBooks()
+  const testimonials = await getTestimonials()
   const consultationHref = buildWhatsAppUrl(buildInquiryMessage("konsultasi"))
 
   return (
@@ -114,16 +117,14 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative z-10 rounded-[2.5rem] bg-white p-4 shadow-2xl shadow-violet-100">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-violet-50">
-                  <div className="absolute inset-0 flex items-center justify-center bg-violet-100">
-                    <div className="p-8 text-center">
-                      <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-violet-200 text-3xl font-bold text-violet-700">
-                        A
-                      </div>
-                      <p className="font-medium text-violet-600">
-                        {profileContent.name}
-                      </p>
-                    </div>
-                  </div>
+                  <Image
+                    src={assetRefs.mainHero}
+                    alt={profileContent.name}
+                    width={554}
+                    height={693}
+                    priority
+                    className="h-full w-full object-cover object-top"
+                  />
 
                   <div className="absolute right-6 bottom-6 left-6 rounded-2xl border border-white/50 bg-white/90 p-4 backdrop-blur-md">
                     <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-violet-600">
