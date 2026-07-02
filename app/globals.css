@@ -36,41 +36,53 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* Override violet palette → warm #67568d */
+  --color-violet-50: #f7f4fb;
+  --color-violet-100: #efe9f7;
+  --color-violet-200: #dfd3ef;
+  --color-violet-300: #c7b4e2;
+  --color-violet-400: #a88fd0;
+  --color-violet-500: #8670b9;
+  --color-violet-600: #67568d;
+  --color-violet-700: #524573;
+  --color-violet-800: #3e3459;
+  --color-violet-900: #2a233f;
+  --color-violet-950: #171327;
 }
 
 :root {
-  --background: #FDFCFE;
-  --foreground: #1e293b;
-  --card: #ffffff;
-  --card-foreground: #1e293b;
-  --popover: #ffffff;
-  --popover-foreground: #1e293b;
-  --primary: #7c3aed;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f3ff;
-  --secondary-foreground: #4c1d95;
-  --muted: #f8fafc;
-  --muted-foreground: #64748b;
-  --accent: #ede9fe;
-  --accent-foreground: #5b21b6;
+  --background: #fdf8f6;
+  --foreground: #342f35;
+  --card: rgba(255, 255, 255, 0.9);
+  --card-foreground: #342f35;
+  --popover: rgba(255, 255, 255, 0.96);
+  --popover-foreground: #342f35;
+  --primary: #67568d;
+  --primary-foreground: #fdf7ff;
+  --secondary: #f2edea;
+  --secondary-foreground: #4a3f58;
+  --muted: #f5efec;
+  --muted-foreground: #6b6666;
+  --accent: #efe3ea;
+  --accent-foreground: #4a3f58;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: rgba(124, 58, 237, 0.25);
-  --chart-1: #7c3aed;
-  --chart-2: #a78bfa;
-  --chart-3: #c4b5fd;
-  --chart-4: #ddd6fe;
-  --chart-5: #ede9fe;
-  --radius: 0.75rem;
-  --sidebar: #FDFCFE;
-  --sidebar-foreground: #1e293b;
-  --sidebar-primary: #7c3aed;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5f3ff;
-  --sidebar-accent-foreground: #4c1d95;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: rgba(124, 58, 237, 0.25);
+  --border: rgba(103, 86, 141, 0.12);
+  --input: rgba(103, 86, 141, 0.12);
+  --ring: rgba(103, 86, 141, 0.18);
+  --chart-1: #d5bfdc;
+  --chart-2: #efe3ea;
+  --chart-3: #dbe7df;
+  --chart-4: #8c78b6;
+  --chart-5: #b6a5c8;
+  --radius: 1rem;
+  --sidebar: #fffdfd;
+  --sidebar-foreground: #342f35;
+  --sidebar-primary: #67568d;
+  --sidebar-primary-foreground: #fdf7ff;
+  --sidebar-accent: #f5efec;
+  --sidebar-accent-foreground: #4a3f58;
+  --sidebar-border: rgba(103, 86, 141, 0.12);
+  --sidebar-ring: rgba(103, 86, 141, 0.18);
 }
 
 .dark {
@@ -99,7 +111,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-[#FDFCFE] text-slate-800 antialiased;
+    @apply bg-[#fdf8f6] text-slate-800 antialiased;
     font-family: 'Plus Jakarta Sans', var(--font-body), sans-serif;
     scroll-behavior: smooth;
   }
@@ -115,26 +127,26 @@
     -webkit-backdrop-filter: blur(12px);
   }
   .gradient-bg {
-    background: radial-gradient(circle at top right, #f5f3ff 0%, #ffffff 50%, #fafafa 100%);
+    background: radial-gradient(circle at top right, #efe9f7 0%, #ffffff 50%, #fdf8f6 100%);
   }
   .violet-gradient-bg {
-    background: radial-gradient(circle at top right, #f5f3ff 0%, #ffffff 50%, #fafafa 100%);
+    background: radial-gradient(circle at top right, #efe9f7 0%, #ffffff 50%, #fdf8f6 100%);
   }
   .violet-shadow {
-    box-shadow: 0 20px 50px -12px rgba(124, 58, 237, 0.12);
+    box-shadow: 0 20px 50px -12px rgba(103, 86, 141, 0.12);
   }
   .profile-shadow {
-    box-shadow: 0 20px 50px -12px rgba(124, 58, 237, 0.12);
+    box-shadow: 0 20px 50px -12px rgba(103, 86, 141, 0.12);
   }
   .custom-shadow {
-    box-shadow: 0 24px 60px rgba(124, 58, 237, 0.08);
+    box-shadow: 0 24px 60px rgba(103, 86, 141, 0.08);
   }
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .hover-lift:hover {
     transform: translateY(-5px);
-    box-shadow: 0 24px 60px rgba(124, 58, 237, 0.12);
+    box-shadow: 0 24px 60px rgba(103, 86, 141, 0.12);
   }
   .service-card:hover {
     transform: translateY(-4px);
@@ -145,14 +157,14 @@
   }
   .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 60px rgba(124, 58, 237, 0.1);
+    box-shadow: 0 24px 60px rgba(103, 86, 141, 0.1);
   }
   .summary-panel {
-    background: linear-gradient(180deg, rgba(245, 243, 255, 0.3), rgba(255, 255, 255, 0.9));
+    background: linear-gradient(180deg, rgba(239, 233, 247, 0.3), rgba(255, 255, 255, 0.9));
   }
   .active-pill {
-    background: #7c3aed !important;
+    background: #67568d !important;
     color: #ffffff !important;
-    border-color: #7c3aed !important;
+    border-color: #67568d !important;
   }
 }

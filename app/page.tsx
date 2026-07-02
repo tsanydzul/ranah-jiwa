@@ -382,7 +382,7 @@ export default async function HomePage() {
       </section>
 
       {/* Privacy */}
-      <section className="bg-[#FDFCFE] px-6 py-24">
+      <section className="bg-[#fdf8f6] px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 space-y-4 text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-violet-600">
