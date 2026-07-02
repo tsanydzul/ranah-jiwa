@@ -1,48 +1,25 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import {
-  ArrowRight,
-  Brain,
-  CalendarDays,
-  GraduationCap,
-  HeartHandshake,
-  MessageCircleHeart,
-  NotebookTabs,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  UsersRound,
-  type LucideIcon,
-} from "lucide-react"
 
-import { SectionHeading, SiteSection } from "@/components/site/section"
-import { Badge } from "@/components/ui/badge"
-import { buttonVariants } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 import {
   assetRefs,
   books,
   homeContent,
   profileContent,
-  profilePageContent,
   productsPageContent,
   services,
   siteConfig,
   testimonials,
   trustStats,
 } from "@/lib/site-content"
-import { cn } from "@/lib/utils"
-import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
   title: "Ruang Aman untuk Memahami Diri",
   description:
     "Ranah Jiwa menghadirkan ruang aman untuk berbagi, refleksi, dan bertumbuh lewat layanan psikologi yang hangat, profesional, dan terpercaya.",
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Ruang Aman untuk Memahami Diri | Ranah Jiwa",
     description:
@@ -51,415 +28,425 @@ export const metadata: Metadata = {
   },
 }
 
-const serviceIcons: Record<string, LucideIcon> = {
-  annafisa: Brain,
-  assyifa: Sparkles,
-  assakinah: HeartHandshake,
-  attarbiyah: NotebookTabs,
-  "al-aqila": CalendarDays,
-  "al-ilmaa": UsersRound,
-}
+const featuredPromises = [
+  { icon: "ri-shield-check-line", text: "Ruang aman tanpa rasa dihakimi" },
+  { icon: "ri-whatsapp-line", text: "WhatsApp jadi langkah paling mudah" },
+  { icon: "ri-compass-line", text: "Pendekatan hangat dan terarah" },
+]
+
+const focusList = [
+  "Pendampingan dengan pendekatan psikologis dan spiritual",
+  "Kecemasan, stres & burnout",
+  "Depresi & proses berduka",
+  "Pengembangan diri & penyesuaian hidup",
+  "Relasi & pola hubungan",
+  "Luka batin, inner child & forgiveness",
+  "Perilaku adiktif & maladaptif",
+  "Neurodivergent (ADHD, Autism, Dyslexia)",
+]
 
 export default function HomePage() {
   const consultationHref = buildWhatsAppUrl(buildInquiryMessage("konsultasi"))
-  const featuredPromises = [
-    "Ruang aman tanpa rasa dihakimi",
-    "WhatsApp jadi langkah paling mudah",
-    "Pendekatan hangat dan terarah",
-  ]
 
   return (
-    <div className="space-y-18 py-8 md:space-y-24 md:py-12">
-      <SiteSection className="section-wash">
-        <div className="hero-shell hero-shell-flat rounded-[2.7rem] border border-white/70 bg-white/88 px-5 py-6 shadow-soft sm:px-6 md:px-8 md:py-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-center">
-            <div className="min-w-0 space-y-6">
-              <Badge className="flex w-full max-w-full items-center justify-center rounded-full bg-primary/12 px-4 py-2 text-center text-[10px] leading-4 font-semibold tracking-[0.16em] text-primary uppercase whitespace-normal hover:bg-primary/12 sm:w-fit sm:max-w-fit sm:px-4 sm:text-xs sm:tracking-[0.24em]">
-                {homeContent.heroBadge}
-              </Badge>
-
-              <div className="space-y-4">
-                <h1 className="max-w-3xl text-[3.2rem] leading-[0.98] font-semibold tracking-tight text-foreground sm:text-6xl md:text-7xl">
-                  {siteConfig.heroHeadline}
-                </h1>
-                <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                  {siteConfig.heroSubheadline}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {featuredPromises.map((item) => (
-                  <span
-                    key={item}
-                    className="glass-pill inline-flex w-full items-center justify-center rounded-full px-4 py-2 text-center text-[11px] leading-4 font-semibold tracking-[0.14em] text-brand-purple uppercase whitespace-normal sm:w-auto sm:text-xs sm:tracking-[0.16em]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={consultationHref}
-                  rel="noreferrer"
-                  target="_blank"
-                  className={cn(
-                    buttonVariants({ size: "lg" }),
-                    "h-12 w-full rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] px-6 text-base text-primary-foreground shadow-soft hover:opacity-95 sm:w-auto"
-                  )}
-                >
-                  <MessageCircleHeart className="size-4" />
-                  Mulai Konsultasi
-                </a>
-                <Link
-                  href="/layanan"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-12 w-full rounded-full border-white/70 bg-white/78 px-6 text-base shadow-soft sm:w-auto"
-                  )}
-                >
-                  Lihat Layanan
-                  <ArrowRight className="size-4" />
-                </Link>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                {trustStats.map((stat) => (
-                  <Card
-                    key={stat.label}
-                    className="hover-lift min-w-0 rounded-[1.75rem] border border-white/70 bg-white/80 shadow-soft"
-                  >
-                    <CardContent className="space-y-1 p-5">
-                      <p className="font-heading text-3xl font-semibold text-primary">
-                        {stat.value}
-                      </p>
-                      <p className="font-medium text-foreground">{stat.label}</p>
-                      <p className="text-sm leading-6 text-muted-foreground">{stat.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden px-6 pt-12 pb-24 gradient-bg">
+        <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-12">
+          {/* Left */}
+          <div className="space-y-8 lg:col-span-7">
+            <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-4 py-2 text-sm font-bold uppercase tracking-wider text-violet-700">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-violet-600" />
+              {homeContent.heroBadge}
             </div>
 
-            <div className="relative min-w-0">
-              <div className="absolute inset-5 rounded-[2.5rem] bg-[radial-gradient(circle_at_top,rgba(213,191,220,0.55),transparent_45%)] blur-3xl" />
-              <Card className="relative overflow-hidden rounded-[2.5rem] border border-white/70 bg-organic-panel soft-outline">
-                <CardContent className="space-y-6 p-4 sm:p-5 md:p-6">
-                  <div className="relative overflow-hidden bg-brand-soft p-3 editorial-frame">
-                    <Image
-                      src={assetRefs.mainHero}
-                      alt={profileContent.name}
-                      width={2773}
-                      height={4160}
-                      priority
-                      className="editorial-frame h-[24rem] w-full object-cover object-top sm:h-[31rem]"
-                    />
-                    <div className="paper-tag absolute right-4 bottom-4 max-w-[15rem] rounded-[1.7rem] p-4">
-                      <p className="text-xs font-semibold tracking-[0.22em] text-brand-purple uppercase">
-                        Pendampingan
-                      </p>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                        {homeContent.miniCards[0]?.body}
-                      </p>
-                    </div>
-                  </div>
+            <h2 className="serif-heading text-6xl leading-[1.1] text-slate-900 xl:text-7xl">
+              Ruang Aman untuk{" "}
+              <span className="text-violet-600">Memahami Diri</span> &amp; Bertumbuh
+            </h2>
 
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <p className="font-heading text-3xl leading-none font-semibold text-foreground md:text-4xl">
-                        {profileContent.name}
-                      </p>
-                      <p className="max-w-lg text-sm leading-6 text-muted-foreground">
-                        {profileContent.identityCopy}
-                      </p>
-                    </div>
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-600">
+              {siteConfig.heroSubheadline}
+            </p>
 
-                    <div className="grid gap-3 md:grid-cols-3">
-                      {profilePageContent.trustCards.map((item) => (
-                        <div
-                          key={item.title}
-                          className="paper-panel rounded-[1.5rem] p-4"
-                        >
-                          <p className="text-xs font-semibold tracking-[0.2em] text-brand-purple uppercase">
-                            {item.title}
-                          </p>
-                          <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                            {item.body}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="flex flex-wrap gap-3">
+              {featuredPromises.map((item) => (
+                <span
+                  key={item.text}
+                  className="inline-flex items-center gap-2 rounded-xl border border-violet-100 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm"
+                >
+                  <i className={`${item.icon} text-violet-500`} />
+                  {item.text}
+                </span>
+              ))}
             </div>
-          </div>
-        </div>
-      </SiteSection>
 
-      <SiteSection className="section-wash">
-        <div className="mx-auto max-w-4xl">
-          <Card className="rounded-[2.2rem] border border-white/70 bg-white/82 shadow-soft">
-            <CardContent className="space-y-6 p-6 md:p-8">
-              <SectionHeading
-                eyebrow={homeContent.shortProfile.eyebrow}
-                title={profileContent.name}
-                description={profileContent.shortIntro}
-              />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <InfoTile
-                  icon={GraduationCap}
-                  title={homeContent.shortProfile.educationTitle}
-                  body={profileContent.education.join(" - ")}
-                />
-                <InfoTile
-                  icon={Sparkles}
-                  title={homeContent.shortProfile.approachTitle}
-                  body={homeContent.shortProfile.approachBody}
-                />
-              </div>
-              <p className="text-base leading-7 text-muted-foreground">
-                {profileContent.longIntro[0]}
-              </p>
+            <div className="flex flex-col gap-4 pt-4 sm:flex-row">
+              <a
+                href={consultationHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl bg-violet-600 px-8 py-4 text-lg font-bold text-white shadow-xl shadow-violet-200 transition-all hover:bg-violet-700"
+              >
+                Mulai Konsultasi <i className="ri-arrow-right-line" />
+              </a>
               <Link
-                href="/profil"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-11 rounded-full border-white/70 bg-white px-5"
-                )}
+                href="/layanan"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border-2 border-violet-100 px-8 py-4 text-lg font-bold text-slate-700 transition-all hover:border-violet-200"
               >
-                {homeContent.shortProfile.ctaLabel}
-                <ArrowRight className="size-4" />
-              </Link>
-            </CardContent>
-          </Card>
-        </div>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <SectionHeading
-          eyebrow={homeContent.servicesPreview.eyebrow}
-          title={homeContent.servicesPreview.title}
-          description={homeContent.servicesPreview.description}
-        />
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3">
-          {services.map((service) => {
-            const Icon = serviceIcons[service.id]
-
-            return (
-              <Card
-                key={service.id}
-                className="hover-lift min-w-[18rem] snap-start rounded-[2rem] border border-white/70 bg-white/84 shadow-soft md:min-w-0"
-              >
-                <CardContent className="flex h-full flex-col gap-5 p-6">
-                  <div className="-mt-1 h-1.5 w-16 rounded-full bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))]" />
-                  <span className="inline-flex size-12 items-center justify-center rounded-full bg-primary/12 text-primary">
-                    <Icon className="size-5" />
-                  </span>
-                  <div className="space-y-3">
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold tracking-[0.26em] text-brand-purple uppercase">
-                        {service.packageName}
-                      </p>
-                      <h3 className="font-heading text-xl font-semibold text-foreground">
-                        {service.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm leading-6 text-muted-foreground">{service.summary}</p>
-                  </div>
-                  <div className="mt-auto flex flex-col gap-3">
-                    <Link
-                      href={buildBookingPath(service.packageName)}
-                      className={cn(
-                        buttonVariants({ size: "lg" }),
-                        "h-11 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-primary-foreground"
-                      )}
-                    >
-                      {service.ctaLabel}
-                    </Link>
-                    <Link
-                      href="/layanan"
-                      className="text-sm font-semibold text-brand-purple hover:text-foreground"
-                    >
-                      {homeContent.servicesPreview.detailLabel}
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <SectionHeading
-          eyebrow={homeContent.testimonials.eyebrow}
-          title={homeContent.testimonials.title}
-          description={homeContent.testimonials.description}
-        />
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
-          {testimonials.map((item) => (
-            <Card
-              key={item.name}
-              className="hover-lift min-w-[18rem] snap-start rounded-[2rem] border border-white/70 bg-white/84 shadow-soft md:min-w-0"
-            >
-              <CardContent className="space-y-5 p-6">
-                <div className="flex items-center gap-1 text-brand-purple">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star key={index} className="size-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-base leading-7 text-muted-foreground">
-                  &quot;{item.quote}&quot;
-                </p>
-                <div>
-                  <p className="font-semibold text-foreground">{item.name}</p>
-                  <p className="text-sm text-muted-foreground">{item.role}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <Card className="rounded-[2.35rem] border border-white/70 bg-white/84 shadow-soft">
-          <CardContent className="grid gap-6 p-6 md:grid-cols-[1.02fr_0.98fr] md:p-8">
-            <div className="space-y-4">
-              <SectionHeading
-                eyebrow={homeContent.productsPreview.eyebrow}
-                title={homeContent.productsPreview.title}
-                description={homeContent.productsPreview.description}
-              />
-              <Link
-                href="/produk"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "h-12 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] px-6 text-base text-primary-foreground"
-                )}
-              >
-                {homeContent.productsPreview.ctaLabel}
-                <ArrowRight className="size-4" />
+                Lihat Layanan
               </Link>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="paper-panel rounded-[1.7rem] p-5">
-                <p className="text-xs font-semibold tracking-[0.18em] text-brand-purple uppercase">
-                  Karya buku
-                </p>
-                <p className="mt-3 font-heading text-4xl leading-none font-semibold text-foreground">
-                  {books.length}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  {productsPageContent.hero.quickStats[0]?.body}
-                </p>
-              </div>
-              <div className="paper-panel rounded-[1.7rem] p-5">
-                <p className="text-xs font-semibold tracking-[0.18em] text-brand-purple uppercase">
-                  Seminar
-                </p>
-                <p className="mt-3 font-heading text-4xl leading-none font-semibold text-foreground">
-                  {productsPageContent.hero.quickStats[1]?.title}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  {productsPageContent.hero.quickStats[1]?.body}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <Card className="rounded-[2.3rem] border border-white/70 bg-white/84 shadow-soft">
-          <CardContent className="space-y-6 p-6 md:p-8">
-            <div className="flex items-start gap-4">
-              <span className="inline-flex size-12 items-center justify-center rounded-full bg-primary/12 text-primary">
-                <ShieldCheck className="size-5" />
-              </span>
-              <div className="space-y-2">
-                <h2 className="font-heading text-2xl font-semibold text-foreground md:text-3xl">
-                  {homeContent.privacy.title}
-                </h2>
-                <p className="max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">
-                  {homeContent.privacy.description}
-                </p>
-              </div>
-            </div>
-            <Separator className="bg-brand-pink/35" />
-            <div className="grid gap-3 md:grid-cols-3">
-              {siteConfig.privacyPoints.map((point) => (
-                <div
-                  key={point}
-                  className="rounded-[1.6rem] bg-brand-soft/88 p-4 text-sm leading-6 text-muted-foreground"
-                >
-                  {point}
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 border-t border-violet-100 pt-12">
+              {trustStats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-3xl font-bold text-violet-900">{stat.value}</div>
+                  <div className="text-sm font-medium text-slate-500">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
+          </div>
 
-      <SiteSection className="section-wash pb-4">
-        <Card className="rounded-[2.6rem] border border-white/70 bg-organic-panel soft-outline">
-          <CardContent className="space-y-6 p-8 text-center md:p-12">
-            <div className="space-y-3">
-              <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
-                {homeContent.finalCta.title}
+          {/* Right - Profile Card */}
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="relative z-10 rounded-[2.5rem] bg-white p-4 shadow-2xl shadow-violet-100">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-violet-50">
+                  <div className="absolute inset-0 flex items-center justify-center bg-violet-100">
+                    <div className="p-8 text-center">
+                      <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-violet-200 text-3xl font-bold text-violet-700">
+                        A
+                      </div>
+                      <p className="font-medium text-violet-600">
+                        {profileContent.name}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="absolute right-6 bottom-6 left-6 rounded-2xl border border-white/50 bg-white/90 p-4 backdrop-blur-md">
+                    <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-violet-600">
+                      Pendampingan
+                    </p>
+                    <p className="text-sm font-medium leading-relaxed text-slate-700">
+                      {homeContent.miniCards[0]?.body}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Badge */}
+              <div className="absolute -top-6 -right-6 z-20 flex h-32 w-32 flex-col items-center justify-center rounded-full border-4 border-white bg-violet-600 p-4 text-center text-white shadow-xl">
+                <i className="ri-verified-badge-fill mb-1 text-2xl" />
+                <span className="text-[10px] font-bold uppercase leading-tight">
+                  Profesional Psikolog
+                </span>
+              </div>
+
+              {/* Name plate below */}
+              <div className="mt-8 space-y-4 px-4">
+                <h3 className="serif-heading text-2xl text-slate-900">
+                  {profileContent.name}
+                </h3>
+                <div className="flex flex-col gap-2 text-xs font-semibold text-slate-400">
+                  <span>NO. SILP: DD333F4F05B8</span>
+                  <span>NO. STR: 20252371-2026-0309</span>
+                </div>
+                <p className="italic leading-relaxed text-slate-600">
+                  &quot;{profileContent.identityCopy}&quot;
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Focus & Profile */}
+      <section className="bg-violet-50 px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-start gap-16 lg:grid-cols-2">
+            {/* Left - Focus Areas */}
+            <div>
+              <h3 className="mb-6 text-sm font-bold uppercase tracking-[0.2em] text-violet-600">
+                Fokus &amp; Ketertarikan Isu
+              </h3>
+              <h2 className="serif-heading mb-8 text-4xl leading-tight text-slate-900">
+                Membantu Anda menavigasi berbagai tantangan kehidupan batin.
               </h2>
-              <p className="mx-auto max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-                {homeContent.finalCta.description}
+              <p className="mb-10 text-lg text-slate-600">
+                Privasi klien dijaga dan proses berjalan profesional dengan pendekatan yang komprehensif.
               </p>
-            </div>
-            <div className="flex flex-col justify-center gap-3 sm:flex-row">
-              <a
-                href={consultationHref}
-                rel="noreferrer"
-                target="_blank"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "h-12 rounded-full border-0 bg-whatsapp px-6 text-base text-white shadow-[0_20px_44px_rgba(37,211,102,0.28)] hover:bg-whatsapp/90"
-                )}
-              >
-                <MessageCircleHeart className="size-4" />
-                {homeContent.finalCta.primaryLabel}
-              </a>
-              <Link
-                href="/booking"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-12 rounded-full border-white/80 bg-white/88 px-6 text-base"
-                )}
-              >
-                {homeContent.finalCta.secondaryLabel}
-                <CalendarDays className="size-4" />
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
-    </div>
-  )
-}
 
-function InfoTile({
-  icon: Icon,
-  title,
-  body,
-}: {
-  icon: typeof GraduationCap
-  title: string
-  body: string
-}) {
-  return (
-    <div className="rounded-[1.6rem] bg-brand-soft/85 p-5">
-      <span className="inline-flex size-10 items-center justify-center rounded-full bg-white text-brand-purple shadow-soft">
-        <Icon className="size-5" />
-      </span>
-      <p className="mt-4 font-semibold text-foreground">{title}</p>
-      <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
-    </div>
+              <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
+                {focusList.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 font-medium text-slate-700"
+                  >
+                    <i className="ri-checkbox-circle-fill text-xl text-violet-500" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right - Profile Card */}
+            <div className="space-y-6">
+              <div className="rounded-[2.5rem] border border-violet-100 bg-white p-10 shadow-xl shadow-violet-100/50">
+                <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-violet-600">
+                  Profil singkat
+                </h4>
+                <h2 className="serif-heading mb-6 text-2xl text-slate-900">
+                  {profileContent.name}
+                </h2>
+
+                <div className="mb-8 space-y-6">
+                  <div>
+                    <h5 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
+                      <i className="ri-graduation-cap-line text-violet-500" /> Latar pendidikan
+                    </h5>
+                    <ul className="space-y-2 text-sm text-slate-600">
+                      {profileContent.education.map((item) => (
+                        <li key={item} className="border-l-2 border-violet-200 pl-4">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
+                      <i className="ri-mental-health-line text-violet-500" /> Pendekatan
+                    </h5>
+                    <p className="text-sm leading-relaxed text-slate-600">
+                      {homeContent.shortProfile.approachBody}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mb-8 leading-relaxed text-slate-600">
+                  {profileContent.longIntro[0]}
+                </p>
+
+                <Link
+                  href="/profil"
+                  className="flex w-full items-center justify-center rounded-2xl border border-violet-200 bg-violet-50 py-4 font-bold text-violet-700 transition-all hover:bg-violet-100"
+                >
+                  {homeContent.shortProfile.ctaLabel}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="bg-white px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 space-y-4 text-center">
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600">
+              Layanan Ranah Jiwa
+            </h3>
+            <h2 className="serif-heading mx-auto max-w-2xl text-4xl text-slate-900 md:text-5xl">
+              Pendampingan Jiwa dengan Pendekatan Spiritualitas
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className="service-card flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-8 shadow-sm transition-all hover:shadow-xl"
+              >
+                <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-violet-500">
+                  {service.packageName}
+                </span>
+                <h4 className="mb-3 text-xl font-bold text-slate-900">{service.title}</h4>
+                <p className="mb-8 flex-grow text-sm leading-relaxed text-slate-500">
+                  {service.summary}
+                </p>
+                <div className="space-y-3">
+                  <Link
+                    href={buildBookingPath(service.packageName)}
+                    className="block rounded-xl bg-violet-600 py-3 text-center text-sm font-bold text-white"
+                  >
+                    Booking
+                  </Link>
+                  <Link
+                    href="/layanan"
+                    className="block text-center text-xs font-bold text-slate-400 hover:text-violet-500"
+                  >
+                    Lihat detail
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="overflow-hidden bg-violet-50 px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col items-end justify-between gap-8 md:flex-row">
+            <div className="space-y-4">
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600">
+                Testimoni
+              </h3>
+              <h2 className="serif-heading text-4xl text-slate-900">
+                Cerita kecil dari proses yang terasa aman
+              </h2>
+            </div>
+            <div className="flex gap-2">
+              <button className="flex h-12 w-12 items-center justify-center rounded-full border border-violet-200 text-violet-600 transition-all hover:bg-violet-600 hover:text-white">
+                <i className="ri-arrow-left-s-line text-xl" />
+              </button>
+              <button className="flex h-12 w-12 items-center justify-center rounded-full border border-violet-200 text-violet-600 transition-all hover:bg-violet-600 hover:text-white">
+                <i className="ri-arrow-right-s-line text-xl" />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((item, i) => (
+              <div
+                key={item.name}
+                className="relative rounded-[2rem] border border-violet-100 bg-white p-8 shadow-sm"
+              >
+                <div className="mb-6 flex text-amber-400">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <i key={idx} className="ri-star-fill" />
+                  ))}
+                </div>
+                <p className="mb-8 leading-relaxed text-slate-600">
+                  &quot;{item.quote}&quot;
+                </p>
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-full font-bold text-white ${
+                      ["bg-violet-600", "bg-blue-600", "bg-rose-600", "bg-emerald-600", "bg-indigo-600", "bg-orange-600"][
+                        i % 6
+                      ]
+                    }`}
+                  >
+                    {item.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-bold text-slate-900">{item.name}</h5>
+                    <p className="text-xs text-slate-400">{item.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products Preview */}
+      <section className="bg-white px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[3rem] bg-slate-900 p-12 lg:p-20">
+            <div className="absolute top-0 right-0 -mt-20 -mr-40 h-full w-1/3 rounded-full bg-violet-600/10 blur-[120px]" />
+
+            <div className="relative z-10 grid items-center gap-16 lg:grid-cols-2">
+              <div className="space-y-8">
+                <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-violet-400">
+                  Produk
+                </h3>
+                <h2 className="serif-heading text-4xl text-white md:text-5xl">
+                  Karya buku dan jejak seminar dalam satu halaman
+                </h2>
+                <p className="text-lg text-slate-400">
+                  Eksplorasi pemikiran dan materi edukasi kami untuk membantu perjalanan pertumbuhan Anda lebih dalam.
+                </p>
+                <Link
+                  href="/produk"
+                  className="inline-flex items-center gap-3 rounded-2xl bg-violet-600 px-8 py-4 font-bold text-white transition-all hover:bg-violet-700"
+                >
+                  Buka halaman Produk <i className="ri-book-open-line" />
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center backdrop-blur-sm">
+                  <div className="mb-2 text-5xl font-bold text-violet-400">{books.length}</div>
+                  <div className="font-medium text-white">karya buku</div>
+                </div>
+                <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 text-center backdrop-blur-sm">
+                  <div className="mb-2 text-5xl font-bold text-violet-400">
+                    {productsPageContent.hero.quickStats[1]?.title}
+                  </div>
+                  <div className="font-medium text-white">seminar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Privacy */}
+      <section className="bg-[#FDFCFE] px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 space-y-4 text-center">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+              <i className="ri-shield-user-line text-3xl" />
+            </div>
+            <h2 className="serif-heading text-4xl text-slate-900">
+              Privasi dan kerahasiaan tetap jadi prioritas
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              { icon: "ri-lock-2-line", title: "Data Terenkripsi", body: siteConfig.privacyPoints[0] },
+              { icon: "ri-eye-off-line", title: "Anonimitas", body: siteConfig.privacyPoints[1] },
+              { icon: "ri-file-shield-2-line", title: "Kode Etik", body: siteConfig.privacyPoints[2] },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="space-y-4 rounded-[2.5rem] border border-violet-100 bg-white p-10 text-center shadow-sm transition-all hover:shadow-md"
+              >
+                <i className={`${item.icon} mb-2 block text-4xl text-violet-500`} />
+                <h4 className="text-xl font-bold text-slate-900">{item.title}</h4>
+                <p className="text-sm leading-relaxed text-slate-500">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="relative overflow-hidden bg-violet-600 px-6 py-24">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-white/10 blur-[100px]" />
+          <div className="absolute right-[-10%] bottom-[-20%] h-[500px] w-[500px] rounded-full bg-violet-900/20 blur-[100px]" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-4xl space-y-10 text-center">
+          <h2 className="serif-heading text-5xl leading-tight text-white md:text-6xl">
+            Mulai Cerita Sekarang
+          </h2>
+          <p className="mx-auto max-w-2xl text-xl leading-relaxed text-violet-100">
+            Bila Anda sedang mencari ruang aman untuk berbagi, refleksi, dan bertumbuh, langkah pertama bisa dimulai hari ini.
+          </p>
+          <div className="flex flex-col justify-center gap-6 pt-6 sm:flex-row">
+            <a
+              href={consultationHref}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-10 py-5 text-lg font-bold text-violet-700 shadow-2xl transition-all hover:bg-violet-50"
+            >
+              <i className="ri-whatsapp-line text-2xl" /> Hubungi via WhatsApp
+            </a>
+            <Link
+              href="/booking"
+              className="inline-flex items-center justify-center gap-3 rounded-2xl border border-violet-500/50 bg-violet-800 px-10 py-5 text-lg font-bold text-white transition-all hover:bg-violet-900"
+            >
+              Booking sesi
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

@@ -2,21 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { CalendarDays, CheckCircle2, LockKeyhole, MessageCircleHeart } from "lucide-react"
 
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
-import {
-  bookingOptions,
-  findServiceByPackageName,
-  services,
-  type BookingFormData,
-} from "@/lib/site-content"
-import { cn } from "@/lib/utils"
+import { bookingOptions, findServiceByPackageName, services, type BookingFormData } from "@/lib/site-content"
 import { buildBookingWhatsAppMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 const initialValues: BookingFormData = {
@@ -45,7 +32,6 @@ export function BookingForm() {
 
   useEffect(() => {
     if (!requestedService || requestedService === lastPrefill.current) return
-
     setValues((current) => ({ ...current, layanan: requestedService }))
     setErrors((current) => ({ ...current, layanan: undefined }))
     lastPrefill.current = requestedService
@@ -58,7 +44,6 @@ export function BookingForm() {
 
   function validate() {
     const nextErrors: ErrorState = {}
-
     if (!values.nama.trim()) nextErrors.nama = "Nama perlu diisi."
     if (!values.umur.trim()) nextErrors.umur = "Umur perlu diisi."
     if (!values.jenisKelamin.trim()) nextErrors.jenisKelamin = "Jenis kelamin perlu dipilih."
@@ -67,7 +52,6 @@ export function BookingForm() {
     if (!values.metode.trim()) nextErrors.metode = "Pilih metode sesi."
     if (!values.tanggal.trim()) nextErrors.tanggal = "Pilih tanggal sesi."
     if (!values.jam.trim()) nextErrors.jam = "Pilih jam sesi."
-
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
   }
@@ -75,219 +59,232 @@ export function BookingForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!validate()) return
-
     const url = buildWhatsAppUrl(buildBookingWhatsAppMessage(values))
     setRedirectUrl(url)
     setSubmitted(true)
-
     window.setTimeout(() => {
       window.location.assign(url)
     }, 1200)
   }
 
+  const inputClass =
+    "w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-slate-800 font-medium transition-all focus:border-violet-300 focus:ring-2 focus:ring-violet-100 focus:outline-none"
+  const selectClass =
+    "w-full cursor-pointer appearance-none rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-slate-800 font-medium transition-all focus:border-violet-300 focus:ring-2 focus:ring-violet-100 focus:outline-none"
+
   return (
-    <Card className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 shadow-soft">
-      <CardHeader className="space-y-4 bg-[linear-gradient(180deg,rgba(245,239,236,0.76),rgba(255,255,255,0))] p-6 sm:p-8">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary/12 text-primary">
-            <CalendarDays className="size-5" />
-          </span>
-          <div className="space-y-1">
-            <CardTitle className="font-heading text-2xl">Booking sesi</CardTitle>
-            <p className="text-sm leading-6 text-muted-foreground">
-              Isi data singkat berikut. Setelah itu Anda akan diarahkan ke WhatsApp
-              dengan pesan otomatis yang sudah terisi.
+    <div className="rounded-[3rem] border border-violet-100 bg-white p-8 md:p-14 custom-shadow">
+      {/* Header */}
+      <div className="mb-12 flex items-center gap-5">
+        <div className="flex h-16 w-16 items-center justify-center rounded-[1.25rem] bg-violet-600 text-white shadow-xl shadow-violet-200">
+          <i className="ri-calendar-event-line text-3xl" />
+        </div>
+        <div>
+          <h3 className="serif-heading text-3xl text-slate-900 md:text-4xl">Booking sesi</h3>
+          <p className="mt-1 text-sm font-medium text-slate-500">
+            Isi data singkat berikut. Setelah itu Anda akan diarahkan ke WhatsApp dengan pesan
+            otomatis yang sudah terisi.
+          </p>
+        </div>
+      </div>
+
+      {requestedService ? (
+        <div className="mb-8 rounded-[1.5rem] bg-violet-50 px-4 py-3 text-sm text-slate-600">
+          Paket terpilih:{" "}
+          <span className="font-bold text-slate-900">{requestedService}</span>
+        </div>
+      ) : null}
+
+      <form className="space-y-8" onSubmit={handleSubmit}>
+        {/* Nama + Umur */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <Field label="Nama" error={errors.nama}>
+            <input
+              type="text"
+              value={values.nama}
+              onChange={(e) => updateValue("nama", e.target.value)}
+              placeholder="Nama lengkap"
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Umur" error={errors.umur}>
+            <input
+              type="number"
+              value={values.umur}
+              onChange={(e) => updateValue("umur", e.target.value)}
+              placeholder="Contoh: 25"
+              className={inputClass}
+            />
+          </Field>
+        </div>
+
+        {/* Jenis Kelamin + WhatsApp */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <Field label="Jenis kelamin" error={errors.jenisKelamin}>
+            <select
+              value={values.jenisKelamin}
+              onChange={(e) => updateValue("jenisKelamin", e.target.value)}
+              className={selectClass}
+            >
+              <option value="" disabled>
+                Pilih jenis kelamin
+              </option>
+              {bookingOptions.genders.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Field label="No WhatsApp" error={errors.whatsapp}>
+            <input
+              type="tel"
+              value={values.whatsapp}
+              onChange={(e) => updateValue("whatsapp", e.target.value)}
+              placeholder="08xx xxxx xxxx"
+              className={inputClass}
+            />
+          </Field>
+        </div>
+
+        {/* Layanan + Metode */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <Field label="Pilih layanan" error={errors.layanan}>
+            <select
+              value={values.layanan}
+              onChange={(e) => updateValue("layanan", e.target.value)}
+              className={selectClass}
+            >
+              <option value="" disabled>
+                Pilih layanan
+              </option>
+              {services.map((service) => (
+                <option key={service.id} value={service.packageName}>
+                  {service.packageName} ({service.title})
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Field label="Pilih metode" error={errors.metode}>
+            <select
+              value={values.metode}
+              onChange={(e) => updateValue("metode", e.target.value)}
+              className={selectClass}
+            >
+              <option value="" disabled>
+                Online / Offline
+              </option>
+              {bookingOptions.methods.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+
+        {/* Tanggal + Jam */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <Field label="Pilih tanggal" error={errors.tanggal}>
+            <input
+              type="date"
+              value={values.tanggal}
+              onChange={(e) => updateValue("tanggal", e.target.value)}
+              className={`${inputClass} cursor-pointer`}
+            />
+          </Field>
+          <Field label="Pilih jam" error={errors.jam}>
+            <select
+              value={values.jam}
+              onChange={(e) => updateValue("jam", e.target.value)}
+              className={selectClass}
+            >
+              <option value="" disabled>
+                Pilih jam
+              </option>
+              {bookingOptions.hours.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+
+        {/* Keluhan */}
+        <div className="space-y-3">
+          <div className="flex items-end justify-between">
+            <label className="ml-1 text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+              Keluhan singkat
+            </label>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+              Opsional
+            </span>
+          </div>
+          <textarea
+            value={values.keluhan}
+            onChange={(e) => updateValue("keluhan", e.target.value)}
+            placeholder="Ceritakan singkat apa yang sedang ingin Anda bicarakan."
+            rows={5}
+            className="w-full resize-none rounded-[2rem] border border-slate-100 bg-slate-50 px-6 py-4 text-slate-800 font-medium transition-all focus:border-violet-300 focus:ring-2 focus:ring-violet-100 focus:outline-none"
+          />
+          <p className="ml-1 flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+            <i className="ri-information-line text-sm" /> Boleh singkat. Tujuannya membantu kami
+            menyiapkan respon awal yang lebih pas.
+          </p>
+        </div>
+
+        {/* Privacy */}
+        <div className="flex items-start gap-4 rounded-[2rem] border border-violet-100 bg-violet-50 p-6">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-white text-violet-600 shadow-sm">
+            <i className="ri-lock-2-line text-xl" />
+          </div>
+          <div>
+            <p className="mb-1 text-sm font-bold text-slate-900">Kerahasiaan tetap dijaga.</p>
+            <p className="text-[11px] leading-relaxed font-medium text-slate-500">
+              Informasi dalam form ini hanya digunakan untuk proses booking awal dan komunikasi
+              terkait jadwal.
             </p>
           </div>
         </div>
-        {requestedService ? (
-          <div className="rounded-[1.5rem] bg-brand-soft/90 px-4 py-3 text-sm text-muted-foreground">
-            Paket terpilih: <span className="font-semibold text-foreground">{requestedService}</span>
-          </div>
-        ) : null}
-      </CardHeader>
 
-      <CardContent className="space-y-8 p-6 pt-0 sm:p-8 sm:pt-0">
-        <form className="space-y-8" onSubmit={handleSubmit}>
-          <div className="grid gap-5 rounded-[1.8rem] bg-brand-soft/52 p-4 md:grid-cols-2 md:p-5">
-            <Field label="Nama" error={errors.nama}>
-              <Input
-                value={values.nama}
-                onChange={(event) => updateValue("nama", event.target.value)}
-                placeholder="Nama lengkap"
-                className="h-12 rounded-2xl border-white bg-brand-soft/80 px-4"
-              />
-            </Field>
+        {/* Submit */}
+        <div className="space-y-4">
+          <button
+            type="submit"
+            className="group flex w-full items-center justify-center gap-3 rounded-[2rem] bg-violet-600 py-5 text-xl font-bold text-white shadow-2xl shadow-violet-200 transition-all hover:bg-violet-700"
+          >
+            Lanjutkan ke WhatsApp
+            <i className="ri-heart-add-line text-2xl transition-transform group-hover:scale-110" />
+          </button>
 
-            <Field label="Umur" error={errors.umur}>
-              <Input
-                value={values.umur}
-                onChange={(event) => updateValue("umur", event.target.value)}
-                inputMode="numeric"
-                placeholder="Contoh: 25"
-                className="h-12 rounded-2xl border-white bg-brand-soft/80 px-4"
-              />
-            </Field>
-
-            <Field label="Jenis kelamin" error={errors.jenisKelamin}>
-              <Select
-                value={values.jenisKelamin}
-                onValueChange={(value) => updateValue("jenisKelamin", value ?? "")}
-              >
-                <SelectTrigger className="h-12 w-full rounded-2xl border-white bg-brand-soft/80 px-4">
-                  <SelectValue placeholder="Pilih jenis kelamin" />
-                </SelectTrigger>
-                <SelectContent>
-                  {bookingOptions.genders.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
-
-            <Field label="No WhatsApp" error={errors.whatsapp}>
-              <Input
-                value={values.whatsapp}
-                onChange={(event) => updateValue("whatsapp", event.target.value)}
-                placeholder="08xx xxxx xxxx"
-                className="h-12 rounded-2xl border-white bg-brand-soft/80 px-4"
-              />
-            </Field>
-          </div>
-
-          <Separator className="bg-brand-pink/35" />
-
-          <div className="grid gap-5 rounded-[1.8rem] bg-white/72 p-4 ring-1 ring-brand-purple/8 md:grid-cols-2 md:p-5">
-            <Field label="Pilih layanan" error={errors.layanan}>
-              <Select
-                value={values.layanan}
-                onValueChange={(value) => updateValue("layanan", value ?? "")}
-              >
-                <SelectTrigger className="h-12 w-full rounded-2xl border-white bg-brand-soft/80 px-4">
-                  <SelectValue placeholder="Pilih layanan" />
-                </SelectTrigger>
-                <SelectContent>
-                  {services.map((service) => (
-                    <SelectItem key={service.id} value={service.packageName}>
-                      {service.packageName}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
-
-            <Field label="Pilih metode" error={errors.metode}>
-              <Select
-                value={values.metode}
-                onValueChange={(value) => updateValue("metode", value ?? "")}
-              >
-                <SelectTrigger className="h-12 w-full rounded-2xl border-white bg-brand-soft/80 px-4">
-                  <SelectValue placeholder="Online / Offline" />
-                </SelectTrigger>
-                <SelectContent>
-                  {bookingOptions.methods.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
-
-            <Field label="Pilih tanggal" error={errors.tanggal}>
-              <Input
-                type="date"
-                value={values.tanggal}
-                onChange={(event) => updateValue("tanggal", event.target.value)}
-                className="h-12 rounded-2xl border-white bg-brand-soft/80 px-4"
-              />
-            </Field>
-
-            <Field label="Pilih jam" error={errors.jam}>
-              <Select
-                value={values.jam}
-                onValueChange={(value) => updateValue("jam", value ?? "")}
-              >
-                <SelectTrigger className="h-12 w-full rounded-2xl border-white bg-brand-soft/80 px-4">
-                  <SelectValue placeholder="Pilih jam" />
-                </SelectTrigger>
-                <SelectContent>
-                  {bookingOptions.hours.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Field>
-          </div>
-
-          <Field label="Keluhan singkat" error={errors.keluhan}>
-            <Textarea
-              value={values.keluhan}
-              onChange={(event) => updateValue("keluhan", event.target.value)}
-              placeholder="Ceritakan singkat apa yang sedang ingin Anda bicarakan."
-              className="min-h-32 rounded-[1.75rem] border-white bg-brand-soft/80 px-4 py-3"
-            />
-            <p className="text-xs text-muted-foreground">
-              Boleh singkat. Tujuannya membantu kami menyiapkan respon awal yang lebih pas.
-            </p>
-          </Field>
-
-          <div className="rounded-[1.75rem] bg-brand-soft p-5">
-            <div className="flex gap-3">
-              <LockKeyhole className="mt-0.5 size-5 shrink-0 text-brand-purple" />
-              <div>
-                <p className="font-semibold text-foreground">Kerahasiaan tetap dijaga.</p>
-                <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  Informasi dalam formulir ini digunakan untuk proses booking awal dan
-                  ditangani secara aman, profesional, dan penuh empati.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <Button
-              type="submit"
-              size="lg"
-              className="h-14 w-full rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-base text-primary-foreground shadow-soft hover:opacity-95"
-            >
-              <MessageCircleHeart className="size-4" />
-              Lanjutkan ke WhatsApp
-            </Button>
-
-            {submitted ? (
-              <div className="rounded-[1.75rem] border border-brand-purple/18 bg-primary/8 p-5">
-                <div className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-purple" />
-                  <div className="space-y-2">
-                    <p className="font-semibold text-foreground">Data booking siap dikirim.</p>
-                    <p className="text-sm leading-6 text-muted-foreground">
-                      Anda akan diarahkan ke WhatsApp dalam beberapa detik. Bila tidak
-                      berpindah otomatis, gunakan tombol di bawah.
-                    </p>
-                    <a
-                      href={redirectUrl}
-                      rel="noreferrer"
-                      target="_blank"
-                      className={cn(
-                        buttonVariants({ variant: "outline", size: "lg" }),
-                        "h-11 rounded-full border-brand-purple/20 bg-white px-5"
-                      )}
-                    >
-                      Buka WhatsApp sekarang
-                    </a>
-                  </div>
+          {submitted ? (
+            <div className="rounded-[2rem] border border-violet-100 bg-violet-50 p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-600 text-white">
+                  <i className="ri-check-line text-xl" />
+                </div>
+                <div className="space-y-2">
+                  <p className="font-bold text-slate-900">Data booking siap dikirim.</p>
+                  <p className="text-sm leading-relaxed text-slate-500">
+                    Anda akan diarahkan ke WhatsApp dalam beberapa detik. Bila tidak berpindah
+                    otomatis, gunakan tombol di bawah.
+                  </p>
+                  <a
+                    href={redirectUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                    className="inline-flex items-center gap-2 rounded-full border-2 border-violet-200 bg-white px-5 py-2.5 text-sm font-bold text-violet-600 transition-all hover:bg-violet-50"
+                  >
+                    <i className="ri-whatsapp-line" /> Buka WhatsApp sekarang
+                  </a>
                 </div>
               </div>
-            ) : null}
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+            </div>
+          ) : null}
+        </div>
+      </form>
+    </div>
   )
 }
 
@@ -301,10 +298,12 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <label className="grid gap-2 text-sm font-medium text-foreground">
-      <span>{label}</span>
+    <label className="grid gap-3">
+      <span className="ml-1 text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+        {label}
+      </span>
       {children}
-      {error ? <p className="text-xs text-destructive">{error}</p> : null}
+      {error ? <p className="text-xs font-medium text-red-500">{error}</p> : null}
     </label>
   )
 }

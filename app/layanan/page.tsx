@@ -1,34 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import {
-  ArrowRight,
-  Brain,
-  CalendarDays,
-  ChevronDown,
-  ClipboardCheck,
-  HeartHandshake,
-  MessageCircleHeart,
-  NotebookTabs,
-  Sparkles,
-  UsersRound,
-  type LucideIcon,
-} from "lucide-react"
 
-import { SectionHeading, SiteSection } from "@/components/site/section"
-import { Badge } from "@/components/ui/badge"
-import { buttonVariants } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { serviceNotes, services, servicesPageContent } from "@/lib/site-content"
-import { cn } from "@/lib/utils"
 import { buildBookingPath, buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 
 export const metadata: Metadata = {
   title: "Layanan Psikologi",
   description:
     "Lihat layanan psikologi Ranah Jiwa, mulai dari mental health check up, konseling, asesmen psikologis, hingga psikoedukasi dan seminar.",
-  alternates: {
-    canonical: "/layanan",
-  },
+  alternates: { canonical: "/layanan" },
   openGraph: {
     title: "Layanan Psikologi | Ranah Jiwa",
     description:
@@ -37,333 +17,254 @@ export const metadata: Metadata = {
   },
 }
 
-const iconMap: Record<string, LucideIcon> = {
-  annafisa: Brain,
-  assyifa: Sparkles,
-  assakinah: HeartHandshake,
-  attarbiyah: NotebookTabs,
-  "al-aqila": ClipboardCheck,
-  "al-ilmaa": UsersRound,
+const serviceIcons: Record<string, string> = {
+  annafisa: "ri-heart-pulse-line",
+  assyifa: "ri-mental-health-line",
+  assakinah: "ri-user-smile-line",
+  attarbiyah: "ri-parent-line",
+  "al-aqila": "ri-brain-line",
+  "al-ilmaa": "ri-presentation-line",
 }
 
 export default function ServicesPage() {
   const consultationHref = buildWhatsAppUrl(buildInquiryMessage("layanan yang paling sesuai"))
 
   return (
-    <div className="space-y-18 py-8 md:space-y-24 md:py-12">
-      <SiteSection className="section-wash">
-        <Card className="rounded-[2.5rem] border border-white/70 bg-organic-panel soft-outline">
-          <CardContent className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
-            <div className="space-y-5">
-              <Badge className="w-fit rounded-full bg-primary/12 px-4 py-2 text-xs font-semibold tracking-[0.24em] text-primary uppercase hover:bg-primary/12">
-                {servicesPageContent.hero.badge}
-              </Badge>
-              <h1 className="font-heading text-4xl leading-tight font-semibold tracking-tight text-foreground md:text-6xl md:leading-[1.04]">
-                {servicesPageContent.hero.title}
-              </h1>
-              <p className="max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
-                {servicesPageContent.hero.description}
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {servicesPageContent.hero.quickStats.map((item) => (
-                <div
-                  key={item.title}
-                  className="hover-lift rounded-[1.8rem] bg-white/84 p-5 shadow-soft"
-                >
-                  <p className="font-heading text-2xl font-semibold text-foreground">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.body}</p>
+    <>
+      {/* Hero */}
+      <section className="relative px-6 pt-16 pb-24 gradient-bg">
+        <div className="mx-auto max-w-7xl">
+          <div className="rounded-[3.5rem] border border-violet-100 bg-violet-50/50 p-8 md:p-16">
+            <div className="grid items-center gap-16 lg:grid-cols-12">
+              <div className="space-y-8 lg:col-span-6">
+                <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-violet-700">
+                  LAYANAN RANAH JIWA
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
-          {services.map((service) => (
-            <Link
-              key={service.id}
-              href={`#${service.id}`}
-              className="glass-pill inline-flex shrink-0 items-center rounded-full px-4 py-2 text-sm font-semibold text-foreground"
-            >
-              {service.packageName}
-            </Link>
-          ))}
-        </div>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <div className="grid gap-6">
-          {services.map((service) => {
-            const Icon = iconMap[service.id]
-            const whatsappHref = buildWhatsAppUrl(
-              buildInquiryMessage(`paket ${service.packageName}`)
-            )
-
-            return (
-              <Card
-                key={service.id}
-                id={service.id}
-                className="hover-lift scroll-mt-28 rounded-[2.3rem] border border-white/70 bg-white/84 shadow-soft"
-              >
-                <CardContent className="grid gap-4 p-4 sm:p-5 md:gap-6 md:p-8 lg:grid-cols-[0.72fr_0.28fr]">
-                  <div className="space-y-5">
-                    <div className="flex items-start gap-4">
-                      <span className="inline-flex size-12 items-center justify-center rounded-full bg-primary/12 text-primary">
-                        <Icon className="size-5" />
-                      </span>
-                      <div className="space-y-1">
-                        <p className="text-xs font-semibold tracking-[0.26em] text-brand-purple uppercase">
-                          {service.packageName}
-                        </p>
-                        <h2 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                          {service.title}
-                        </h2>
-                        <p className="text-sm leading-6 text-brand-purple">{service.summary}</p>
-                        <div className="flex flex-wrap gap-2 pt-2 lg:hidden">
-                          <span className="glass-pill rounded-full px-3 py-1 text-xs font-semibold text-foreground">
-                            {service.duration}
-                          </span>
-                          <span className="glass-pill rounded-full px-3 py-1 text-xs font-semibold text-foreground">
-                            {service.fee}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="hidden space-y-5 md:block">
-                      <p className="max-w-3xl text-base leading-7 text-muted-foreground">
-                        {service.description}
-                      </p>
-
-                      <div className="space-y-3">
-                        <p className="text-sm font-semibold text-foreground">Isi layanan</p>
-                        <div className="grid gap-3">
-                          {service.bullets.map((item) => (
-                            <div
-                              key={item}
-                              className="rounded-[1.5rem] bg-brand-soft/85 p-4 text-sm leading-6 text-muted-foreground"
-                            >
-                              {item}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {service.outputs?.length ? (
-                        <div className="space-y-3">
-                          <p className="text-sm font-semibold text-foreground">Output</p>
-                          <div className="grid gap-3 sm:grid-cols-2">
-                            {service.outputs.map((item) => (
-                              <div
-                                key={item}
-                                className="rounded-[1.5rem] bg-white/82 p-4 text-sm leading-6 text-muted-foreground shadow-[inset_0_0_0_1px_rgba(103,86,141,0.08)]"
-                              >
-                                {item}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : null}
-
-                      {service.serviceNotes?.length ? (
-                        <div className="space-y-3">
-                          <p className="text-sm font-semibold text-foreground">Catatan paket</p>
-                          <div className="grid gap-3">
-                            {service.serviceNotes.map((item) => (
-                              <div
-                                key={item}
-                                className="rounded-[1.5rem] border border-brand-purple/12 bg-white p-4 text-sm leading-6 text-muted-foreground"
-                              >
-                                {item}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : null}
-                    </div>
-
-                    <details className="group rounded-[1.6rem] bg-brand-soft/75 md:hidden">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-foreground">
-                        <span>Lihat detail layanan</span>
-                        <ChevronDown className="size-4 transition-transform group-open:rotate-180" />
-                      </summary>
-                      <div className="space-y-4 px-4 pb-4 pt-1">
-                        <p className="text-sm leading-6 text-muted-foreground">
-                          {service.description}
-                        </p>
-
-                        <div className="space-y-2">
-                          <p className="text-sm font-semibold text-foreground">Isi layanan</p>
-                          <div className="grid gap-2">
-                            {service.bullets.map((item) => (
-                              <div
-                                key={item}
-                                className="rounded-[1.2rem] bg-white/82 p-3 text-sm leading-6 text-muted-foreground"
-                              >
-                                {item}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {service.outputs?.length ? (
-                          <div className="space-y-2">
-                            <p className="text-sm font-semibold text-foreground">Output</p>
-                            <div className="grid gap-2">
-                              {service.outputs.map((item) => (
-                                <div
-                                  key={item}
-                                  className="rounded-[1.2rem] bg-white/82 p-3 text-sm leading-6 text-muted-foreground"
-                                >
-                                  {item}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        ) : null}
-
-                        {service.serviceNotes?.length ? (
-                          <div className="space-y-2">
-                            <p className="text-sm font-semibold text-foreground">Catatan paket</p>
-                            <div className="grid gap-2">
-                              {service.serviceNotes.map((item) => (
-                                <div
-                                  key={item}
-                                  className="rounded-[1.2rem] border border-brand-purple/12 bg-white p-3 text-sm leading-6 text-muted-foreground"
-                                >
-                                  {item}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        ) : null}
-                      </div>
-                    </details>
-                  </div>
-
-                  <div className="order-first flex h-full flex-col rounded-[1.6rem] bg-brand-soft/92 p-4 lg:order-none lg:sticky lg:top-28 lg:rounded-[1.8rem] lg:p-5">
-                    <p className="font-heading text-xl font-semibold text-foreground">
-                      Ringkasan
-                    </p>
-                    <div className="mt-4 grid grid-cols-3 gap-3 text-sm leading-6 text-muted-foreground lg:mt-5 lg:grid-cols-1 lg:gap-4">
-                      <ServiceMeta label="Paket" value={service.packageName} />
-                      <ServiceMeta label="Durasi" value={service.duration} />
-                      <ServiceMeta label="Fee" value={service.fee} />
-                    </div>
-
-                    <div className="mt-4 flex flex-col gap-2 pt-1 lg:mt-auto lg:gap-3 lg:pt-6">
-                      <Link
-                        href={buildBookingPath(service.packageName)}
-                        className={cn(
-                          buttonVariants({ size: "lg" }),
-                          "h-11 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-sm text-primary-foreground lg:h-12 lg:text-base"
-                        )}
-                      >
-                        <CalendarDays className="size-4" />
-                        {service.ctaLabel}
-                      </Link>
-                      <a
-                        href={whatsappHref}
-                        rel="noreferrer"
-                        target="_blank"
-                        className={cn(
-                          buttonVariants({ variant: "outline", size: "lg" }),
-                          "h-11 rounded-full border-white/80 bg-white text-sm lg:h-12 lg:text-base"
-                        )}
-                      >
-                        <MessageCircleHeart className="size-4" />
-                        Hubungi via WhatsApp
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-      </SiteSection>
-
-      <SiteSection className="section-wash">
-        <Card className="rounded-[2.3rem] border border-white/70 bg-white/84 shadow-soft">
-          <CardContent className="space-y-5 p-6 md:p-8">
-            <SectionHeading
-              eyebrow={servicesPageContent.notes.eyebrow}
-              title={servicesPageContent.notes.title}
-              description={servicesPageContent.notes.description}
-            />
-            <div className="grid gap-3 md:grid-cols-2">
-              {serviceNotes.map((note) => (
-                <div
-                  key={note}
-                  className="rounded-[1.6rem] bg-brand-soft/85 p-4 text-sm leading-6 text-muted-foreground"
-                >
-                  {note}
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
-
-      <SiteSection className="section-wash pb-4">
-        <Card className="rounded-[2.4rem] border border-white/70 bg-organic-panel soft-outline">
-          <CardContent className="grid gap-6 p-8 md:grid-cols-[1fr_auto] md:items-center md:p-10">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary/12 text-primary">
-                  <ClipboardCheck className="size-5" />
-                </span>
-                <p className="font-heading text-3xl font-semibold tracking-tight text-foreground">
-                  {servicesPageContent.helpCta.title}
+                <h1 className="serif-heading text-5xl leading-[1.1] text-slate-900 md:text-6xl">
+                  Pendampingan Jiwa dengan Pendekatan{" "}
+                  <span className="text-violet-600">Spiritualitas</span>
+                </h1>
+                <p className="max-w-xl text-lg leading-relaxed text-slate-600">
+                  Pilihan layanan Ranah Jiwa dirancang untuk membantu Anda mengenali kebutuhan, memahami bentuk pendampingan, dan memilih langkah yang paling sesuai.
                 </p>
               </div>
-              <p className="max-w-2xl text-base leading-7 text-muted-foreground">
-                {servicesPageContent.helpCta.description}
-              </p>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-6">
+                {servicesPageContent.hero.quickStats.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-[2.5rem] border border-violet-100 bg-white p-8 shadow-sm"
+                  >
+                    <div className="mb-2 text-3xl font-bold text-violet-900">{item.title}</div>
+                    <p className="text-sm leading-relaxed text-slate-500">{item.body}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+          </div>
+        </div>
+      </section>
+
+      {/* Sticky Service Pills */}
+      <div className="sticky top-20 z-40 glass-nav overflow-x-auto border-b border-violet-100 px-6 py-4">
+        <div className="mx-auto flex max-w-7xl flex-nowrap items-center justify-start gap-3 md:flex-wrap md:justify-center">
+          {services.map((service) => (
+            <a
+              key={service.id}
+              href={`#${service.id}`}
+              className="whitespace-nowrap rounded-full border border-violet-100 bg-violet-50 px-5 py-2.5 text-sm font-bold text-violet-700"
+            >
+              {service.packageName}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Service Detail Sections */}
+      <main className="mx-auto max-w-7xl space-y-32 px-6 py-20">
+        {services.map((service) => {
+          const IconRi = serviceIcons[service.id] ?? "ri-heart-line"
+          const whatsappHref = buildWhatsAppUrl(
+            buildInquiryMessage(`paket ${service.packageName}`)
+          )
+          const quoteMap: Record<string, string> = {
+            annafisa: '"Pemeriksaan awal untuk membantu mengenali kondisi psikologis secara lebih terarah."',
+            assyifa: '"Paket pendampingan awal untuk memahami kondisi diri dan mendapatkan arahan."',
+            assakinah: '"Layanan konseling mendalam untuk pertumbuhan dan penyembuhan diri pribadi."',
+            attarbiyah: '"Layanan skrining awal untuk melihat tumbuh kembang anak dan deteksi dini."',
+            "al-aqila": '"Pengukuran objektif terhadap potensi, kepribadian, dan minat bakat."',
+            "al-ilmaa": '"Program edukasi pilihan untuk komunitas, sekolah, orang tua, dan institusi."',
+          }
+
+          return (
+            <section key={service.id} id={service.id} className="scroll-mt-40">
+              <div className="violet-shadow grid grid-cols-1 overflow-hidden rounded-[3rem] border border-violet-100 bg-white lg:grid-cols-12">
+                {/* Main Content */}
+                <div className="space-y-10 p-8 md:p-14 lg:col-span-8">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-100 text-violet-600">
+                      <i className={`${IconRi} text-3xl`} />
+                    </div>
+                    <div>
+                      <span className="mb-1 block text-xs font-bold uppercase tracking-widest text-violet-500">
+                        {service.packageName}
+                      </span>
+                      <h2 className="serif-heading text-3xl text-slate-900">{service.title}</h2>
+                    </div>
+                  </div>
+
+                  <p className="text-lg font-medium italic leading-relaxed text-slate-600">
+                    {quoteMap[service.id] ?? `"${service.summary}"`}
+                  </p>
+
+                  <div className="space-y-6 text-slate-600">
+                    <p>{service.description}</p>
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                      <div>
+                        <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-900">
+                          <i className="ri-list-check-3 text-violet-500" /> Isi Layanan
+                        </h4>
+                        <p className="text-sm leading-relaxed">
+                          {service.bullets.join(" ")}
+                        </p>
+                      </div>
+                      {service.outputs?.length ? (
+                        <div>
+                          <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-900">
+                            <i className="ri-file-list-3-line text-violet-500" /> Output
+                          </h4>
+                          <p className="text-sm leading-relaxed">
+                            {service.outputs.join(", ")}
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-900">
+                            <i className="ri-file-list-3-line text-violet-500" /> Output
+                          </h4>
+                          <p className="text-sm leading-relaxed">
+                            Pemahaman diri dan rencana tindak lanjut.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {service.serviceNotes?.length ? (
+                      <div>
+                        <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-900">
+                          <i className="ri-information-line text-violet-500" /> Catatan
+                        </h4>
+                        <ul className="space-y-1 text-sm leading-relaxed">
+                          {service.serviceNotes.map((note) => (
+                            <li key={note}>{note}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="flex flex-wrap gap-4 pt-6">
+                    <Link
+                      href={buildBookingPath(service.packageName)}
+                      className="inline-flex items-center rounded-2xl bg-violet-600 px-8 py-4 text-lg font-bold text-white shadow-xl shadow-violet-200 transition-all hover:bg-violet-700"
+                    >
+                      {service.ctaLabel}
+                    </Link>
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-3 rounded-2xl border-2 border-slate-100 px-8 py-4 text-lg font-bold text-slate-600 transition-all hover:border-violet-600 hover:text-violet-600"
+                    >
+                      <i className="ri-whatsapp-line" /> Hubungi via WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                {/* Summary Sidebar */}
+                <div className="summary-panel flex flex-col justify-center border-l border-violet-50 p-8 md:p-10 lg:col-span-4">
+                  <h3 className="serif-heading mb-8 text-2xl text-slate-900">Ringkasan</h3>
+                  <div className="space-y-8">
+                    <div>
+                      <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-violet-400">
+                        PAKET
+                      </span>
+                      <p className="text-lg font-bold text-slate-800">{service.packageName}</p>
+                    </div>
+                    <div>
+                      <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-violet-400">
+                        DURASI
+                      </span>
+                      <p className="text-lg font-bold text-slate-800">{service.duration}</p>
+                    </div>
+                    <div>
+                      <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-violet-400">
+                        FEE
+                      </span>
+                      <p className="text-2xl font-bold text-violet-700">{service.fee}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )
+        })}
+      </main>
+
+      {/* Notes */}
+      <section className="bg-violet-50 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 space-y-4 text-center">
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-violet-600">
+              {servicesPageContent.notes.eyebrow}
+            </h3>
+            <h2 className="serif-heading text-4xl text-slate-900">
+              {servicesPageContent.notes.title}
+            </h2>
+            <p className="text-slate-500">{servicesPageContent.notes.description}</p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {serviceNotes.map((note) => (
+              <div
+                key={note}
+                className="rounded-[2rem] border border-violet-100 bg-white p-6 text-sm leading-relaxed text-slate-600 shadow-sm"
+              >
+                <i className="ri-information-line mr-2 text-violet-500" />
+                {note}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Help CTA */}
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto max-w-4xl rounded-[3rem] bg-slate-900 p-10 text-center md:p-16">
+          <div className="mx-auto max-w-2xl space-y-8">
+            <h2 className="serif-heading text-4xl leading-tight text-white">
+              {servicesPageContent.helpCta.title}
+            </h2>
+            <p className="text-lg text-slate-400">
+              {servicesPageContent.helpCta.description}
+            </p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <a
                 href={consultationHref}
-                rel="noreferrer"
                 target="_blank"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "h-12 rounded-full border-0 bg-whatsapp px-6 text-base text-white shadow-[0_20px_44px_rgba(37,211,102,0.28)] hover:bg-whatsapp/90"
-                )}
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl bg-[#25D366] px-8 py-4 font-bold text-white transition-all hover:bg-[#20ba5a]"
               >
-                {servicesPageContent.helpCta.primaryLabel}
-                <ArrowRight className="size-4" />
+                <i className="ri-whatsapp-line text-xl" /> {servicesPageContent.helpCta.primaryLabel}
               </a>
               <Link
                 href="/booking"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-12 rounded-full border-white/80 bg-white/88 px-6 text-base"
-                )}
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border border-violet-500/50 bg-violet-800 px-8 py-4 font-bold text-white transition-all hover:bg-violet-900"
               >
                 {servicesPageContent.helpCta.secondaryLabel}
               </Link>
             </div>
-          </CardContent>
-        </Card>
-      </SiteSection>
-    </div>
-  )
-}
-
-function ServiceMeta({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <p className="text-xs font-semibold tracking-[0.18em] text-brand-purple uppercase lg:text-sm lg:tracking-normal lg:text-foreground lg:uppercase-none">
-        {label}
-      </p>
-      <p>{value}</p>
-    </div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

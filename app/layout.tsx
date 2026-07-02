@@ -1,19 +1,19 @@
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Manrope } from "next/font/google"
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google"
 
 import { SiteChrome } from "@/components/site/chrome"
 import { assetRefs, profileContent, siteConfig } from "@/lib/site-content"
 import "./globals.css"
 
-const bodyFont = Manrope({
+const bodyFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
 })
 
-const headingFont = Cormorant_Garamond({
+const headingFont = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-serif",
+  weight: ["400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata: Metadata = {

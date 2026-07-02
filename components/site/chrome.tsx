@@ -3,17 +3,9 @@
 import Link from "next/link"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
-import {
-  AtSign,
-  MapPin,
-  Menu,
-  MessageCircleHeart,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-content"
 import { cn } from "@/lib/utils"
 import { buildInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
@@ -29,73 +21,74 @@ export function SiteChrome({ children }: SiteChromeProps) {
 
   return (
     <>
-      <div className="sticky top-0 z-50 pt-1 [padding-top:max(env(safe-area-inset-top),0.25rem)] md:pt-0 md:[padding-top:0px]">
-        <div className="hidden border-b border-white/55 bg-white/46 backdrop-blur-xl md:block">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-5 py-2 text-[11px] font-semibold tracking-[0.16em] text-brand-purple uppercase sm:px-6 lg:px-8">
-            <span>Ruang aman untuk berbagi, refleksi, dan bertumbuh</span>
-            <span>{siteConfig.offlineCoverageNote}</span>
-          </div>
+      {/* Announcement Bar */}
+      <div className="bg-violet-700 text-violet-50 py-2.5 px-6 text-center text-xs font-medium tracking-wide uppercase">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 md:flex-row md:gap-8">
+          <span className="flex items-center gap-2">
+            <i className="ri-heart-2-line" /> Ruang aman untuk berbagi, refleksi, dan bertumbuh
+          </span>
+          <span className="hidden md:block opacity-40">|</span>
+          <span className="flex items-center gap-2">
+            <i className="ri-map-pin-2-line" /> {siteConfig.offlineCoverageNote}
+          </span>
         </div>
-        <header className="border-b border-white/40 bg-background/78 backdrop-blur-2xl md:rounded-none">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-6 lg:px-8">
+      </div>
+
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 glass-nav border-b border-violet-100">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
           <Link href="/" className="flex items-center gap-3">
-            <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary/12 text-primary shadow-soft">
-              <Sparkles className="size-5" />
-            </span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-white">
+              <i className="ri-sparkling-fill text-xl" />
+            </div>
             <div>
-              <p className="font-heading text-lg font-bold tracking-tight text-foreground">
+              <h1 className="text-xl font-bold leading-none tracking-tight text-violet-900">
                 {siteConfig.brandName}
+              </h1>
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-violet-500">
+                Psikologi hangat, tenang, profesional
               </p>
-              <p className="text-xs text-muted-foreground">Psikologi hangat, tenang, profesional</p>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-1 rounded-full border border-white/70 bg-white/72 p-1 shadow-soft md:flex">
+          {/* Desktop Nav */}
+          <div className="hidden items-center gap-10 font-medium text-slate-600 lg:flex">
             {siteConfig.navItems.map((item) => {
               const active = pathname === item.href
-
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "rounded-full px-4 py-2 text-sm font-semibold tracking-tight transition-colors",
-                    active
-                      ? "bg-[linear-gradient(135deg,rgba(103,86,141,0.96),rgba(140,120,182,0.92))] text-primary-foreground shadow-soft"
-                      : "text-muted-foreground hover:bg-white/82 hover:text-foreground"
+                    "transition-colors hover:text-violet-600",
+                    active && "font-semibold text-violet-600",
                   )}
                 >
                   {item.label}
                 </Link>
               )
             })}
-          </nav>
-
-          <div className="hidden md:block">
-            <a
-              href={consultationHref}
-              rel="noreferrer"
-              target="_blank"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "h-11 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] px-5 text-sm text-primary-foreground shadow-soft hover:opacity-95"
-              )}
-            >
-              <MessageCircleHeart className="size-4" />
-              Mulai Konsultasi
-            </a>
           </div>
 
+          {/* Desktop CTA */}
+          <a
+            href={consultationHref}
+            rel="noreferrer"
+            target="_blank"
+            className="hidden items-center gap-2 rounded-full bg-violet-600 px-6 py-3 font-semibold text-white shadow-lg shadow-violet-200 transition-all hover:bg-violet-700 lg:inline-flex"
+          >
+            <i className="ri-chat-smile-2-line" />
+            Mulai Konsultasi
+          </a>
+
+          {/* Mobile Nav */}
           <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
-            <SheetTrigger className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white/80 text-foreground shadow-soft md:hidden">
+            <SheetTrigger className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-violet-100 bg-white text-violet-600 lg:hidden">
               <Menu className="size-5" />
               <span className="sr-only">Buka navigasi</span>
             </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-[84vw] max-w-sm border-l-white/70 bg-[rgba(253,248,246,0.96)] p-0 backdrop-blur-2xl"
-            >
-              <SheetHeader className="border-b border-white/70 bg-organic-panel px-5 py-6">
+            <SheetContent side="right" className="w-[84vw] max-w-sm border-violet-100 bg-white p-0">
+              <SheetHeader className="border-b border-violet-100 px-5 py-6">
                 <SheetTitle>{siteConfig.brandName}</SheetTitle>
                 <SheetDescription>
                   Navigasi sederhana dengan WhatsApp sebagai langkah utama.
@@ -104,7 +97,6 @@ export function SiteChrome({ children }: SiteChromeProps) {
               <div className="grid gap-2 p-5">
                 {siteConfig.navItems.map((item) => {
                   const active = pathname === item.href
-
                   return (
                     <Link
                       key={item.href}
@@ -113,110 +105,142 @@ export function SiteChrome({ children }: SiteChromeProps) {
                       className={cn(
                         "rounded-2xl px-4 py-3 text-sm font-semibold transition-colors",
                         active
-                          ? "bg-[linear-gradient(135deg,rgba(103,86,141,0.96),rgba(140,120,182,0.92))] text-primary-foreground"
-                          : "bg-white/82 text-foreground hover:bg-white"
+                          ? "bg-violet-600 text-white"
+                          : "bg-violet-50 text-slate-700 hover:bg-violet-100",
                       )}
                     >
                       {item.label}
                     </Link>
                   )
                 })}
-
                 <a
                   href={consultationHref}
                   onClick={() => setMobileNavOpen(false)}
                   rel="noreferrer"
                   target="_blank"
-                  className={cn(
-                    buttonVariants({ size: "lg" }),
-                    "mt-3 h-12 rounded-full border-0 bg-[linear-gradient(135deg,var(--primary),var(--brand-pink))] text-primary-foreground shadow-soft"
-                  )}
+                  className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-violet-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-200"
                 >
+                  <i className="ri-chat-smile-2-line" />
                   Mulai Konsultasi
                 </a>
               </div>
             </SheetContent>
           </Sheet>
         </div>
-        </header>
-      </div>
+      </nav>
 
-      <main className="flex-1 pb-24 md:pb-0">{children}</main>
+      <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-white/70 bg-white/42">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:px-8">
-          <div className="space-y-4 rounded-[2rem] border border-white/70 bg-white/62 p-5 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary/12 text-primary shadow-soft">
-                <Sparkles className="size-5" />
-              </span>
-              <div>
-                <p className="font-heading text-xl font-semibold">{siteConfig.brandName}</p>
-                <p className="text-sm text-muted-foreground">
-                  Mendampingi proses berbagi, refleksi, dan bertumbuh.
-                </p>
-              </div>
-            </div>
-            <div className="grid gap-3 text-sm leading-6 text-muted-foreground">
-              {siteConfig.privacyPoints.map((point) => (
-                <div key={point} className="flex gap-3 rounded-2xl bg-brand-soft/70 p-4">
-                  <ShieldCheck className="mt-0.5 size-4 shrink-0 text-brand-purple" />
-                  <span>{point}</span>
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-slate-50 px-6 pt-20 pb-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-20 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+            {/* Brand */}
+            <div className="space-y-6 lg:col-span-1">
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600 text-white">
+                  <i className="ri-sparkling-fill text-lg" />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 rounded-[2rem] border border-white/70 bg-white/62 p-5 shadow-soft">
-            <p className="font-heading text-base font-semibold">Navigasi</p>
-            <div className="grid gap-2 text-sm text-muted-foreground">
-              {siteConfig.navItems.map((item) => (
-                <Link key={item.href} href={item.href} className="hover:text-foreground">
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 rounded-[2rem] border border-white/70 bg-white/62 p-5 shadow-soft">
-            <p className="font-heading text-base font-semibold">Terhubung dengan Ranah Jiwa</p>
-            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
-              <a
-                href={consultationHref}
-                rel="noreferrer"
-                target="_blank"
-                className="flex items-center gap-2 hover:text-foreground"
-              >
-                <MessageCircleHeart className="size-4 text-whatsapp" />
-                {siteConfig.whatsappDisplay}
-              </a>
-              <a
-                href={siteConfig.instagramUrl}
-                rel="noreferrer"
-                target="_blank"
-                className="flex items-center gap-2 hover:text-foreground"
-              >
-                <AtSign className="size-4 text-brand-purple" />
-                {siteConfig.instagramHandle}
-              </a>
-              <div className="flex gap-2">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-brand-purple" />
-                <span>{siteConfig.offlineCoverageNote}</span>
+                <div>
+                  <h4 className="text-lg font-bold leading-none tracking-tight text-slate-900">
+                    {siteConfig.brandName}
+                  </h4>
+                  <p className="mt-1 text-[9px] font-semibold uppercase tracking-widest text-slate-400">
+                    Psikologi hangat, tenang, profesional
+                  </p>
+                </div>
               </div>
+              <p className="text-sm leading-relaxed text-slate-500">
+                Ruang aman untuk berbagi, refleksi, dan bertumbuh melalui pendampingan profesional dan terpercaya.
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href={siteConfig.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-sm transition-all hover:text-violet-600"
+                >
+                  <i className="ri-instagram-line text-lg" />
+                </a>
+                <a
+                  href={`mailto:halo@ranahjiwa.id`}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-sm transition-all hover:text-violet-600"
+                >
+                  <i className="ri-mail-line text-lg" />
+                </a>
+              </div>
+            </div>
+
+            {/* Navigasi */}
+            <div>
+              <h5 className="mb-6 font-bold text-slate-900">Navigasi</h5>
+              <ul className="space-y-4 text-sm font-semibold text-slate-500">
+                {siteConfig.navItems.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "transition-all hover:text-violet-600",
+                        pathname === item.href && "text-violet-600",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Kontak */}
+            <div>
+              <h5 className="mb-6 font-bold text-slate-900">Kontak</h5>
+              <ul className="space-y-4 text-sm font-semibold text-slate-500">
+                <li className="flex items-center gap-3">
+                  <i className="ri-instagram-line text-violet-500" /> {siteConfig.instagramHandle}
+                </li>
+                <li className="flex items-center gap-3">
+                  <i className="ri-mail-line text-violet-500" /> halo@ranahjiwa.id
+                </li>
+                <li className="flex items-center gap-3">
+                  <i className="ri-whatsapp-line text-violet-500" /> {siteConfig.whatsappDisplay}
+                </li>
+              </ul>
+            </div>
+
+            {/* Lokasi */}
+            <div>
+              <h5 className="mb-6 font-bold text-slate-900">Lokasi Layanan</h5>
+              <p className="text-sm font-semibold leading-relaxed text-slate-500">
+                Surabaya, Sidoarjo, dan Gresik (Area Jawa Timur). Layanan online tersedia secara global untuk siapa saja.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-4 border-t border-slate-200 pt-8 text-[10px] font-bold uppercase tracking-widest text-slate-400 md:flex-row md:justify-between">
+            <div>© 2025 Ranah Jiwa. All rights reserved.</div>
+            <div className="flex gap-8">
+              <a href="#" className="transition-all hover:text-violet-600">
+                Privacy Policy
+              </a>
+              <a href="#" className="transition-all hover:text-violet-600">
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>
       </footer>
 
+      {/* WhatsApp Floating Button */}
       <a
-        aria-label="Hubungi via WhatsApp"
         href={consultationHref}
-        rel="noreferrer"
         target="_blank"
-        className="fixed right-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-3 text-white shadow-[0_22px_46px_rgba(37,211,102,0.38)] transition-transform hover:scale-[1.03] hover:bg-whatsapp/90 md:right-6 md:bottom-6"
+        rel="noreferrer"
+        className="group fixed right-6 bottom-8 z-[100] flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-3xl text-white shadow-2xl transition-all hover:scale-110 active:scale-95"
       >
-        <MessageCircleHeart className="size-6" />
-        <span className="hidden text-sm font-semibold md:inline">WhatsApp</span>
+        <i className="ri-whatsapp-line" />
+        <span className="pointer-events-none absolute right-full mr-4 whitespace-nowrap rounded-xl border border-slate-100 bg-white px-4 py-2 text-sm font-bold text-slate-800 opacity-0 shadow-lg transition-all group-hover:opacity-100">
+          WhatsApp Kami
+        </span>
       </a>
     </>
   )

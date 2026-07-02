@@ -1,122 +1,115 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { MessageCircleHeart, ShieldCheck } from "lucide-react"
 
 import { BookingForm } from "@/components/site/booking-form"
-import { SectionHeading, SiteSection } from "@/components/site/section"
-import { Card, CardContent } from "@/components/ui/card"
 import { bookingPageContent, siteConfig } from "@/lib/site-content"
 
 export const metadata: Metadata = {
   title: "Booking",
   description:
     "Isi data booking Ranah Jiwa, pilih layanan dan jadwal, lalu lanjut otomatis ke WhatsApp.",
-  alternates: {
-    canonical: "/booking",
-  },
-  robots: {
-    index: false,
-    follow: true,
-    googleBot: {
-      index: false,
-      follow: true,
-    },
-  },
+  alternates: { canonical: "/booking" },
+  robots: { index: false, follow: true },
 }
 
 export default function BookingPage() {
   return (
-    <div className="py-8 md:py-12">
-      <SiteSection className="section-wash">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.86fr_1.14fr]">
-          <div className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <Card className="rounded-[2.3rem] border border-white/70 bg-organic-panel soft-outline">
-              <CardContent className="space-y-6 p-6 md:p-8">
-                <SectionHeading
-                  eyebrow={bookingPageContent.eyebrow}
-                  title={bookingPageContent.title}
-                  description={bookingPageContent.description}
-                />
-                <div className="grid gap-3">
-                  <TrustCard
-                    icon={<MessageCircleHeart className="size-4 text-whatsapp" />}
-                    title="Langsung ke WhatsApp"
-                    body="Setelah form dikirim, pesan booking otomatis sudah siap tanpa perlu tulis ulang."
-                  />
-                  {siteConfig.privacyPoints.slice(0, 2).map((point) => (
-                    <TrustCard
-                      key={point}
-                      icon={<ShieldCheck className="size-4 text-brand-purple" />}
-                      title="Privasi dijaga"
-                      body={point}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+    <main className="gradient-bg min-h-screen px-6 py-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-12">
+          {/* Left Column - Info */}
+          <div className="space-y-12 lg:col-span-5 lg:sticky lg:top-32">
+            <div className="space-y-6">
+              <span className="inline-block rounded-full bg-violet-100 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-violet-700">
+                {bookingPageContent.eyebrow}
+              </span>
+              <h2 className="serif-heading text-5xl leading-tight text-slate-900">
+                {bookingPageContent.title}
+              </h2>
+              <p className="text-lg leading-relaxed font-medium text-slate-600">
+                {bookingPageContent.description}
+              </p>
+            </div>
 
-            <Card className="rounded-[2.3rem] border border-white/70 bg-white/86 shadow-soft">
-              <CardContent className="space-y-4 p-6">
-                <p className="text-xs font-semibold tracking-[0.22em] text-brand-purple uppercase">
-                  Alur singkat
-                </p>
-                {[
-                  "Isi data inti seperlunya.",
-                  "Pilih layanan, metode, tanggal, dan jam.",
-                  "Lanjut otomatis ke WhatsApp untuk konfirmasi.",
-                ].map((item, index) => (
-                  <div key={item} className="flex gap-3 rounded-[1.4rem] bg-brand-soft/72 p-4">
-                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-sm font-semibold text-brand-purple shadow-soft">
-                      {index + 1}
-                    </span>
-                    <p className="text-sm leading-6 text-muted-foreground">{item}</p>
+            {/* Feature Cards */}
+            <div className="space-y-4">
+              <div className="feature-card flex items-start gap-5 rounded-[2rem] border border-violet-100 bg-white p-6 custom-shadow">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
+                  <i className="ri-whatsapp-line text-2xl" />
+                </div>
+                <div>
+                  <h4 className="mb-1 font-bold text-slate-900">Langsung ke WhatsApp</h4>
+                  <p className="text-sm leading-relaxed text-slate-500">
+                    Setelah form dikirim, pesan booking otomatis sudah siap tanpa perlu tulis ulang.
+                  </p>
+                </div>
+              </div>
+
+              {siteConfig.privacyPoints.slice(0, 2).map((point) => (
+                <div
+                  key={point}
+                  className="feature-card flex items-start gap-5 rounded-[2rem] border border-violet-100 bg-white p-6 custom-shadow"
+                >
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
+                    <i className="ri-shield-user-line text-2xl" />
                   </div>
-                ))}
-              </CardContent>
-            </Card>
+                  <div>
+                    <h4 className="mb-1 font-bold text-slate-900">Privasi dijaga</h4>
+                    <p className="text-sm leading-relaxed text-slate-500">{point}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Alur Singkat */}
+            <div className="relative overflow-hidden rounded-[2.5rem] bg-violet-900 p-8 text-violet-100 shadow-2xl">
+              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-violet-800 blur-3xl opacity-50" />
+              <span className="mb-6 block text-[10px] font-extrabold uppercase tracking-widest text-violet-400">
+                ALUR SINGKAT
+              </span>
+              <ul className="relative z-10 space-y-6">
+                <li className="flex items-center gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-violet-500/50 bg-violet-700/80 text-xs font-bold text-white">
+                    1
+                  </span>
+                  <p className="text-sm font-bold">Isi data inti seperlunya.</p>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-violet-500/50 bg-violet-700/80 text-xs font-bold text-white">
+                    2
+                  </span>
+                  <p className="text-sm font-bold">
+                    Pilih layanan, metode, tanggal, dan jam.
+                  </p>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-violet-500/50 bg-violet-700/80 text-xs font-bold text-white">
+                    3
+                  </span>
+                  <p className="text-sm font-bold">
+                    Lanjut otomatis ke WhatsApp untuk konfirmasi.
+                  </p>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          <div>
+          {/* Right Column - Form */}
+          <div className="lg:col-span-7">
             <Suspense fallback={<BookingFormFallback />}>
               <BookingForm />
             </Suspense>
           </div>
         </div>
-      </SiteSection>
-    </div>
+      </div>
+    </main>
   )
 }
 
 function BookingFormFallback() {
   return (
-    <Card className="rounded-[2rem] border border-white/70 bg-white/86 shadow-soft">
-      <CardContent className="p-6 text-sm text-muted-foreground sm:p-8">
-        Menyiapkan form booking...
-      </CardContent>
-    </Card>
-  )
-}
-
-function TrustCard({
-  icon,
-  title,
-  body,
-}: {
-  icon: React.ReactNode
-  title: string
-  body: string
-}) {
-  return (
-    <div className="rounded-[1.7rem] bg-white/78 p-4 shadow-soft">
-      <div className="flex items-start gap-3">
-        <span className="inline-flex size-9 items-center justify-center rounded-full bg-brand-soft">
-          {icon}
-        </span>
-        <div className="space-y-1">
-          <p className="font-semibold text-foreground">{title}</p>
-          <p className="text-sm leading-6 text-muted-foreground">{body}</p>
-        </div>
-      </div>
+    <div className="rounded-[3rem] border border-violet-100 bg-white p-8 md:p-14 custom-shadow">
+      <p className="text-sm text-slate-500">Menyiapkan form booking...</p>
     </div>
   )
 }
