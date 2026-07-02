@@ -64,12 +64,17 @@ async function resolveImageUrl(url: string): Promise<string> {
   if (!url) return ""
   if (url.includes("i.ibb.co")) return url
 
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5000)
+
   try {
     const pageUrl = url.startsWith("//") ? `https:${url}` : url
     const res = await fetch(pageUrl, {
       headers: { "User-Agent": "Mozilla/5.0" },
+      signal: controller.signal,
       next: { revalidate: 86400 },
     })
+    clearTimeout(timeout)
     if (!res.ok) return url
     const html = await res.text()
     const match = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
@@ -80,7 +85,7 @@ async function resolveImageUrl(url: string): Promise<string> {
       return resolved
     }
   } catch {
-    // fall through
+    clearTimeout(timeout)
   }
   return url
 }
