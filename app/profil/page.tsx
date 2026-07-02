@@ -131,16 +131,6 @@ export default function ProfilePage() {
                   {profileContent.name}
                 </h3>
 
-                {/* Credentials */}
-                <div className="flex flex-wrap gap-4">
-                  <div className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-slate-500">
-                    No. SILP: DD333F4F05B8
-                  </div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-slate-500">
-                    No. STR: 20252371-2026-0309
-                  </div>
-                </div>
-
                 {/* Bio */}
                 <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-slate-600">
                   {profileContent.longIntro.map((p) => (

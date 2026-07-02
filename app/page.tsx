@@ -150,10 +150,6 @@ export default async function HomePage() {
                 <h3 className="serif-heading text-2xl text-slate-900">
                   {profileContent.name}
                 </h3>
-                <div className="flex flex-col gap-2 text-xs font-semibold text-slate-400">
-                  <span>NO. SILP: DD333F4F05B8</span>
-                  <span>NO. STR: 20252371-2026-0309</span>
-                </div>
                 <p className="italic leading-relaxed text-slate-600">
                   &quot;{profileContent.identityCopy}&quot;
                 </p>
