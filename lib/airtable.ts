@@ -29,7 +29,7 @@ async function fetchTable(tableName: string): Promise<AirtableRecord[]> {
   try {
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${API_KEY}` },
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 },
     })
 
     if (!res.ok) {
